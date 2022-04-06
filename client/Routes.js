@@ -4,6 +4,9 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
+import ApplicationHome from "./components/Applications/ApplicationHome";
+import CalendarHome from "./components/Calendar/CalendarHome.js";
+import TemplatesHome from "./components/Templates/TemplatesHome";
 
 /**
  * COMPONENT
@@ -21,10 +24,10 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/applications" component={Home} />
+            <Route path="/applications" component={ApplicationHome} />
             <Route path="/tasks" component={Home} />
-            <Route path="/templates" component={Home} />
-            <Route path="/callander" component={Home} />
+            <Route path="/templates" component={TemplatesHome} />
+            <Route path="/calendar" component={CalendarHome} />
             <Redirect to="/home" />
           </Switch>
         ) : (

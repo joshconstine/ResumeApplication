@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 /**
  * COMPONENT
  */
-export const Home = (props) => {
+export const TemplatesHome = (props) => {
   const { username } = props;
   const history = useHistory();
 
@@ -23,7 +23,6 @@ export const Home = (props) => {
       <Box
         sx={{
           width: "90%",
-          height: 500,
           display: "flex",
           justifyContent: "space-evenly",
           flexWrap: "wrap",
@@ -31,20 +30,7 @@ export const Home = (props) => {
         }}
         className="theme"
       >
-        <Box className="homeScreenOption">
-          <Button onClick={() => history.push("/applications")}>
-            Applications
-          </Button>
-        </Box>
-        <Box className="homeScreenOption">
-          <Button onClick={() => history.push("/calendar")}>Calendar</Button>
-        </Box>
-        <Box className="homeScreenOption">
-          s<Button onClick={() => history.push("/tasks")}>Tasks</Button>
-        </Box>
-        <Box className="homeScreenOption">
-          <Button onClick={() => history.push("/templates")}>Templates</Button>
-        </Box>
+        templates
       </Box>
     </Box>
   );
@@ -59,4 +45,4 @@ const mapState = (state) => {
   };
 };
 
-export default connect(mapState)(Home);
+export default connect(mapState)(TemplatesHome);
