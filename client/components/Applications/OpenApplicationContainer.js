@@ -15,6 +15,10 @@ export const OpenApplicationsContainer = (props) => {
       companyName: "google",
       jobTitle: "frontend-dev",
     },
+    {
+      companyName: "uber",
+      jobTitle: "backend-dev",
+    },
   ];
 
   return (
