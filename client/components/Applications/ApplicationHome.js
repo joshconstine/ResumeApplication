@@ -1,15 +1,22 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { Box, Button } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import OpenApplicationsContainer from "./OpenApplicationContainer";
 import ApplicationActions from "./ApplicationActions";
+import { fetchApplications } from "../../store/application";
 /**
  * COMPONENT
  */
 export const ApplicationHome = (props) => {
   const { username } = props;
   const history = useHistory();
+  const applications = useSelector((state) => state.applications);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchApplications());
+  }, []);
 
   return (
     <Box
