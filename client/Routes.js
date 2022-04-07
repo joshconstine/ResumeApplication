@@ -9,6 +9,7 @@ import CalendarHome from "./components/Calendar/CalendarHome.js";
 import TemplatesHome from "./components/Templates/TemplatesHome";
 import MeetTheCreator from "./components/Navbars/Footer/MeetTheCreator";
 import About from "./components/Navbars/Footer/About";
+import CreateApplication from "./components/Applications/CreateApplication";
 /**
  * COMPONENT
  */
@@ -31,6 +32,8 @@ class Routes extends Component {
             <Route path="/calendar" component={CalendarHome} />
             <Route path="/about" component={About} />
             <Route path="/creator" component={MeetTheCreator} />
+            <Route path="/createApplication" component={CreateApplication} />
+
             <Redirect to="/home" />
           </Switch>
         ) : (

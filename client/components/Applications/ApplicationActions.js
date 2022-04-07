@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 /**
  * COMPONENT
  */
@@ -21,7 +22,9 @@ export const ApplicationActions = (props) => {
         }}
       >
         <Box className="ApplicationAction theme">2 more applications</Box>
-        <Box className="ApplicationAction theme">Add Application</Box>
+        <Link className="ApplicationAction theme" to={"/createApplication"}>
+          <Box className="ApplicationAction theme">Add Application</Box>
+        </Link>
         <Box className="ApplicationAction theme">Historic Applications</Box>
       </Box>
     </Box>

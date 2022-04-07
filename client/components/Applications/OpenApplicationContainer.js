@@ -27,9 +27,6 @@ export const OpenApplicationsContainer = (props) => {
   const applications = useSelector((state) => state.applications);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchApplications());
-  }, []);
   return (
     <Box className="theme twothirdContainer">
       {applications ? (
