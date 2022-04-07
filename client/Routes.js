@@ -7,7 +7,8 @@ import { me } from "./store";
 import ApplicationHome from "./components/Applications/ApplicationHome";
 import CalendarHome from "./components/Calendar/CalendarHome.js";
 import TemplatesHome from "./components/Templates/TemplatesHome";
-
+import MeetTheCreator from "./components/Navbars/Footer/MeetTheCreator";
+import About from "./components/Navbars/Footer/About";
 /**
  * COMPONENT
  */
@@ -28,6 +29,8 @@ class Routes extends Component {
             <Route path="/tasks" component={Home} />
             <Route path="/templates" component={TemplatesHome} />
             <Route path="/calendar" component={CalendarHome} />
+            <Route path="/about" component={About} />
+            <Route path="/creator" component={MeetTheCreator} />
             <Redirect to="/home" />
           </Switch>
         ) : (
