@@ -1,7 +1,6 @@
 const router = require("express").Router();
-const {
-  models: { Application },
-} = require("../db");
+const { Application } = require("../db");
+const { User } = require("../db");
 module.exports = router;
 
 router.get("/", async (req, res, next) => {
@@ -15,7 +14,6 @@ router.get("/", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    console.log("in delete");
     const application = await Application.findOne({
       where: {
         id: req.params.id,
@@ -29,7 +27,14 @@ router.delete("/:id", async (req, res, next) => {
 });
 router.post("/", async (req, res, next) => {
   try {
+    const token = req.headers.authorization;
+
     const createdApplication = await Application.create(req.body);
+
+    const user = await User.findByToken(token);
+
+    await user.addApplication(createdApplication);
+
     await res.status(201).send(createdApplication);
   } catch (error) {
     next(error);

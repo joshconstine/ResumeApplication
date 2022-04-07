@@ -23,7 +23,7 @@ export const OpenApplicationsContainer = (props) => {
   //   },
   // ];
   const history = useHistory();
-  const applications = useSelector((state) => state.applications);
+  const applications = useSelector((state) => state.auth.Applications);
   const dispatch = useDispatch();
 
   return (

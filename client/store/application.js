@@ -48,7 +48,12 @@ export const fetchCreateApplication = (application, history) => {
     try {
       const { data: created } = await axios.post(
         "/api/applications",
-        application
+        application,
+        {
+          headers: {
+            Authorization: window.localStorage.getItem("token"),
+          },
+        }
       );
       dispatch(createApplication(created));
     } catch (err) {
