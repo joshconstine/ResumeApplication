@@ -12,3 +12,18 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+
+router.delete("/:id", async (req, res, next) => {
+  try {
+    console.log("in delete");
+    const application = await Application.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    application.destroy();
+    res.send(application);
+  } catch (err) {
+    next(err);
+  }
+});

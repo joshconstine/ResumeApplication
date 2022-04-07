@@ -1,7 +1,15 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
+import { fetchDeleteApplication } from "../../store/application";
+import { connect, useSelector, useDispatch } from "react-redux";
 
 const OpenApplicationRow = (props) => {
+  const dispatch = useDispatch();
+
+  async function handleDelete() {
+    await dispatch(fetchDeleteApplication(props.id));
+  }
+
   return (
     <Box
       sx={{
@@ -33,7 +41,7 @@ const OpenApplicationRow = (props) => {
         <Box className="companyInfo theme">4/19/2022</Box>
       </Box>
       <Box>
-        <Button>delete</Button>
+        <Button onClick={handleDelete}>delete</Button>
       </Box>
     </Box>
   );

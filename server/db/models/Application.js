@@ -22,6 +22,9 @@ const Application = db.define("Application", {
   positionDate: {
     type: DataTypes.STRING,
   },
+  websiteURL: {
+    type: DataTypes.STRING,
+  },
 });
 
 module.exports = Application;

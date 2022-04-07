@@ -1,26 +1,35 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
 import OpenApplicationRow from "./OpenApplicationRow";
+import { useHistory } from "react-router-dom";
+import { fetchApplications } from "../../store/application";
+
 /**
  * COMPONENT
  */
 export const OpenApplicationsContainer = (props) => {
-  let applications = [
-    {
-      companyName: "Facebook",
-      jobTitle: "fullstack-dev",
-    },
-    {
-      companyName: "google",
-      jobTitle: "frontend-dev",
-    },
-    {
-      companyName: "uber",
-      jobTitle: "backend-dev",
-    },
-  ];
+  // let applications = [
+  //   {
+  //     companyName: "Facebook",
+  //     jobTitle: "fullstack-dev",
+  //   },
+  //   {
+  //     companyName: "google",
+  //     jobTitle: "frontend-dev",
+  //   },
+  //   {
+  //     companyName: "uber",
+  //     jobTitle: "backend-dev",
+  //   },
+  // ];
+  const history = useHistory();
+  const applications = useSelector((state) => state.applications);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchApplications());
+  }, []);
   return (
     <Box className="theme twothirdContainer">
       {applications ? (
@@ -28,7 +37,8 @@ export const OpenApplicationsContainer = (props) => {
           return (
             <OpenApplicationRow
               companyName={application.companyName}
-              jobTitle={application.jobTitle}
+              jobTitle={application.positionName}
+              id={application.id}
               key={i}
             />
           );

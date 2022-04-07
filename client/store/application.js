@@ -58,6 +58,7 @@ export const fetchCreateApplication = (application, history) => {
 };
 
 export const fetchDeleteApplication = (application, history) => {
+  console.log("in fetch");
   return async (dispatch) => {
     const { data: created } = await axios.delete(
       `/api/applications/${application}`
