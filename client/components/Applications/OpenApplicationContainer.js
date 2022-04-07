@@ -3,7 +3,6 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
 import OpenApplicationRow from "./OpenApplicationRow";
 import { useHistory } from "react-router-dom";
-import { fetchApplications } from "../../store/application";
 
 /**
  * COMPONENT

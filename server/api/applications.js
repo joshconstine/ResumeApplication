@@ -27,3 +27,11 @@ router.delete("/:id", async (req, res, next) => {
     next(err);
   }
 });
+router.post("/", async (req, res, next) => {
+  try {
+    const createdApplication = await Application.create(req.body);
+    await res.status(201).send(createdApplication);
+  } catch (error) {
+    next(error);
+  }
+});
