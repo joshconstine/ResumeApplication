@@ -1,4 +1,5 @@
 import axios from "axios";
+import { me } from "./auth";
 
 const initialState = [];
 
@@ -55,7 +56,9 @@ export const fetchCreateApplication = (application, history) => {
           },
         }
       );
-      dispatch(createApplication(created));
+      const { message } = await axios.post("/api/sms", application);
+      dispatch(await createApplication(created));
+      dispatch(await me());
     } catch (err) {
       console.log(err);
     }
@@ -73,7 +76,8 @@ export const fetchDeleteApplication = (application, history) => {
         },
       }
     );
-    dispatch(deleteApplication(created));
+    dispatch(await deleteApplication(created));
+    dispatch(await me());
   };
 };
 

@@ -51,7 +51,7 @@ const Footer = () => {
           Application Helper
         </Typography>
         <Typography variant="p" sx={{ fontSize: 11 }}>
-          We're on a mission to show people the real value of their $
+          'You miss 100% of the shots you dont take'
         </Typography>
       </Box>
       <Box

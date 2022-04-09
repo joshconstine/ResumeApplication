@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import OpenApplicationsContainer from "./OpenApplicationContainer";
 import ApplicationActions from "./ApplicationActions";
+import { fontFamily } from "@mui/system";
 /**
  * COMPONENT
  */
@@ -17,20 +18,25 @@ export const ApplicationHome = (props) => {
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
+        flexWrap: "wrap",
       }}
     >
-      <h3>Welcome, {username}</h3>
-      {/* <Box className="theme twothirdContainer">applications</Box> */}
       <Box
         sx={{
           width: "100%",
           display: "flex",
+          flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "space-center",
         }}
       >
+        <Box sx={{ display: "flex" }}>
+          <Typography sx={{ width: "49%", fontFamily: "Fantasy" }} variant="h3">
+            Applications{" "}
+          </Typography>
+          <ApplicationActions />
+        </Box>
         <OpenApplicationsContainer />
-        <ApplicationActions />
       </Box>
     </Box>
   );
