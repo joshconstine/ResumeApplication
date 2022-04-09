@@ -5,12 +5,14 @@ const db = require("./db");
 const User = require("./models/User");
 const Application = require("./models/Application");
 
-//associations could go here!
+//associations
+
+//one to many relationship between users and applications
+User.hasMany(Application);
+Application.belongsTo(User);
 
 module.exports = {
   db,
-  models: {
-    User,
-    Application,
-  },
+  User,
+  Application,
 };

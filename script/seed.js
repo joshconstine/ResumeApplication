@@ -1,9 +1,6 @@
 "use strict";
 
-const {
-  db,
-  models: { User, Application },
-} = require("../server/db");
+const { db, Application, User } = require("../server/db");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -30,10 +27,14 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
+
   return {
     users: {
       cody: users[0],
       murphy: users[1],
+    },
+    applications: {
+      fbfullstack: applications[0],
     },
   };
 }

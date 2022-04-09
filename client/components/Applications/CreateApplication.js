@@ -36,12 +36,19 @@ const CreateApplication = () => {
     };
     await dispatch(fetchCreateApplication(application));
   }
+  const fourms = [
+    { text: "Company Name", ref: companyNameRef },
+    { text: "Position Name", ref: positionNameRef },
+    { text: "Position Description", ref: positionDescriptionRef },
+    { text: "Date", ref: positionDateRef },
+    { text: "Website Url:", ref: websiteURLRef },
+  ];
 
   return (
     <Box className="twothirdContainer theme">
       <h1>create application</h1>
-      <Box>
-        <FormControl>
+      <Box className="column">
+        {/* <FormControl>
           <InputLabel htmlFor="Name">Company Name</InputLabel>
           <Input aria-describedby="my-helper-text" inputRef={companyNameRef} />
         </FormControl>
@@ -63,7 +70,19 @@ const CreateApplication = () => {
         <FormControl>
           <InputLabel htmlFor="Price">Website Url: </InputLabel>
           <Input aria-describedby="my-helper-text" inputRef={websiteURLRef} />
-        </FormControl>
+        </FormControl> */}
+
+        {fourms.map((fourm, i) => {
+          return (
+            <Box key={i}>
+              <FormControl>
+                <InputLabel htmlFor="Name">{fourm.text}</InputLabel>
+                <Input aria-describedby="my-helper-text" inputRef={fourm.ref} />
+              </FormControl>
+            </Box>
+          );
+        })}
+
         <Button onClick={(e) => handleSubmit(e)}>submit</Button>
       </Box>
     </Box>

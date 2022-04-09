@@ -48,7 +48,12 @@ export const fetchCreateApplication = (application, history) => {
     try {
       const { data: created } = await axios.post(
         "/api/applications",
-        application
+        application,
+        {
+          headers: {
+            Authorization: window.localStorage.getItem("token"),
+          },
+        }
       );
       dispatch(createApplication(created));
     } catch (err) {
@@ -61,7 +66,12 @@ export const fetchDeleteApplication = (application, history) => {
   console.log("in fetch");
   return async (dispatch) => {
     const { data: created } = await axios.delete(
-      `/api/applications/${application}`
+      `/api/applications/${application}`,
+      {
+        headers: {
+          Authorization: window.localStorage.getItem("token"),
+        },
+      }
     );
     dispatch(deleteApplication(created));
   };
