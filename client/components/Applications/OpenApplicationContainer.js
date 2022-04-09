@@ -3,6 +3,7 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
 import OpenApplicationRow from "./OpenApplicationRow";
 import { useHistory } from "react-router-dom";
+import { fetchApplications } from "../../store/application";
 
 /**
  * COMPONENT
@@ -26,9 +27,27 @@ export const OpenApplicationsContainer = (props) => {
   const applications = useSelector((state) => state.auth.Applications);
   const dispatch = useDispatch();
 
+  function renderApplications(applications) {
+    console.log(applications);
+    if (applications.length === 0) {
+      return <h1>no open applications</h1>;
+    } else {
+      return applications.map((application, i) => {
+        return (
+          <OpenApplicationRow
+            companyName={application.companyName}
+            jobTitle={application.positionName}
+            id={application.id}
+            key={i}
+          />
+        );
+      });
+    }
+  }
+
   return (
     <Box className="theme twothirdContainer">
-      {applications ? (
+      {/* {applications ? (
         applications.map((application, i) => {
           return (
             <OpenApplicationRow
@@ -41,7 +60,8 @@ export const OpenApplicationsContainer = (props) => {
         })
       ) : (
         <>no applications</>
-      )}
+      )} */}
+      {renderApplications(applications)}
     </Box>
   );
 };

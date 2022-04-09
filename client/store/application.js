@@ -66,7 +66,12 @@ export const fetchDeleteApplication = (application, history) => {
   console.log("in fetch");
   return async (dispatch) => {
     const { data: created } = await axios.delete(
-      `/api/applications/${application}`
+      `/api/applications/${application}`,
+      {
+        headers: {
+          Authorization: window.localStorage.getItem("token"),
+        },
+      }
     );
     dispatch(deleteApplication(created));
   };

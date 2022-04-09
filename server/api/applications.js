@@ -14,11 +14,18 @@ router.get("/", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
+    const token = req.headers.authorization;
+
     const application = await Application.findOne({
       where: {
         id: req.params.id,
       },
     });
+
+    const user = await User.findByToken(token);
+
+    await user.removeApplication(application);
+
     application.destroy();
     res.send(application);
   } catch (err) {
