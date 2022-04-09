@@ -19,6 +19,7 @@ router.post("/", async (req, res, next) => {
         to: "+19202657335",
       })
       .then((message) => console.log("sid", message.sid));
+    res.sendStatus(200);
   } catch (err) {
     next(err);
   }
