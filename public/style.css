@@ -20,7 +20,7 @@ form div {
   display: inline-block;
 }
 .theme {
-  background-color: #d98f8f;
+  background-color: grey;
 }
 .homeScreenOption {
   width: 35%;
@@ -33,7 +33,7 @@ form div {
   align-items: center;
 }
 .twothirdContainer {
-  width: 70%;
+  width: 90%;
   height: 500px;
   display: flex;
   flex-direction: column;
