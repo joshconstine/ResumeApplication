@@ -12,6 +12,8 @@ const client = require("twilio")(accountid, authToken);
 router.post("/", async (req, res, next) => {
   try {
     console.log("req body", req.body);
+    console.log("req headders", req.headers);
+
     client.messages
       .create({
         body: `this message is to remind you about your applicaiton with ${req.body.companyName} for the position of ${req.body.positionName}`,
