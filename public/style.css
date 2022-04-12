@@ -20,7 +20,7 @@ form div {
   display: inline-block;
 }
 .theme {
-  background-color: #d98f8f;
+  background-color: grey;
 }
 .homeScreenOption {
   width: 35%;
@@ -33,7 +33,7 @@ form div {
   align-items: center;
 }
 .twothirdContainer {
-  width: 70%;
+  width: 90%;
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -79,4 +79,20 @@ form div {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.optionsRow {
+  display: flex;
+  justify-content: flex-end;
+  width: 49%;
+  align-self: flex-end;
+  padding-bottom: 30px;
+}
+.actions {
+  background-color: #d98f8f;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+  margin: 10px;
+  border-radius: 14px;
 }

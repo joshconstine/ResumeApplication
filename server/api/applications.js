@@ -1,6 +1,9 @@
 const router = require("express").Router();
+const dispatch = require("dispatch");
 const { Application } = require("../db");
 const { User } = require("../db");
+const sendMessage = require("./sms");
+
 module.exports = router;
 
 router.get("/", async (req, res, next) => {
@@ -22,9 +25,9 @@ router.delete("/:id", async (req, res, next) => {
       },
     });
 
-    const user = await User.findByToken(token);
+    // const user = await User.findByToken(token);
 
-    await user.removeApplication(application);
+    // await user.removeApplication(application);
 
     application.destroy();
     res.send(application);

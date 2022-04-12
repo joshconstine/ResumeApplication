@@ -1,6 +1,9 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
-import { fetchDeleteApplication } from "../../store/application";
+import {
+  fetchApplications,
+  fetchDeleteApplication,
+} from "../../store/application";
 import { connect, useSelector, useDispatch } from "react-redux";
 
 const OpenApplicationRow = (props) => {
@@ -8,6 +11,7 @@ const OpenApplicationRow = (props) => {
 
   async function handleDelete() {
     await dispatch(fetchDeleteApplication(props.id));
+    await dispatch(fetchApplications());
   }
 
   return (
