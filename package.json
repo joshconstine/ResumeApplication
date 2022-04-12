@@ -20,7 +20,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
-    "@emotion/react": "^11.9.0",
+    "@emotion/react": "^17.0.0",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.6.1",
     "axios": "^0.21.1",
@@ -46,7 +46,7 @@
     "esm": "^3.2.25",
     "mocha": "^6.2.3",
     "nodemon": "^1.19.4",
-    "react": "^16.8.6",
+    "react": "^17.0.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
