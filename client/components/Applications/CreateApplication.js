@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
 import { fetchCreateApplication } from "../../store/application";
 import { useDispatch } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
 
 const CreateApplication = () => {
   let companyNameRef = useRef("");
@@ -9,6 +10,7 @@ const CreateApplication = () => {
   let positionDescriptionRef = useRef();
   let websiteURLRef = useRef();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -20,6 +22,7 @@ const CreateApplication = () => {
       websiteURL: websiteURLRef.current.value,
     };
     await dispatch(fetchCreateApplication(application));
+    history.push("/applications");
   }
   const fourms = [
     { text: "Company Name", ref: companyNameRef },

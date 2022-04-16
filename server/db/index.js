@@ -13,6 +13,8 @@ User.hasMany(Application);
 Application.belongsTo(User);
 Application.hasMany(Event);
 Event.belongsTo(Application);
+User.hasMany(Event);
+Event.belongsTo(User);
 
 module.exports = {
   db,
