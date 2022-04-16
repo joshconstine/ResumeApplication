@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { me } from "./auth";
 const initialState = {};
 
 const SET_APPLICATION = "SET_APPLICATION";
@@ -42,6 +42,7 @@ export const updateSingleApplication = (application, id) => {
         }
       );
       await dispatch(setApplication(data));
+      dispatch(await me());
     } catch (err) {
       console.log(err);
     }
