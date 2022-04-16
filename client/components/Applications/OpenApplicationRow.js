@@ -4,6 +4,8 @@ import {
   fetchApplications,
   fetchDeleteApplication,
 } from "../../store/application";
+import { useHistory, Link } from "react-router-dom";
+
 import { connect, useSelector, useDispatch } from "react-redux";
 
 const OpenApplicationRow = (props) => {
@@ -40,7 +42,9 @@ const OpenApplicationRow = (props) => {
           justifyContent: "space-between",
         }}
       >
-        <Box className="companyInfo theme">{props.companyName}</Box>
+        <Link to={`/application/${props.id}`}>
+          <Box className="companyInfo theme">{props.companyName}</Box>
+        </Link>
         <Box className="companyInfo theme">{props.jobTitle}</Box>
         <Box className="companyInfo theme">4/19/2022</Box>
       </Box>

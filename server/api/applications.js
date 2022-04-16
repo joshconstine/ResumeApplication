@@ -8,7 +8,12 @@ module.exports = router;
 
 router.get("/", async (req, res, next) => {
   try {
-    const applications = await Application.findAll({});
+    const token = req.headers.authorization;
+
+    const user = await User.findByToken(token);
+    const app = req.params.id;
+
+    let applications = user.Applications;
     res.json(applications);
   } catch (err) {
     next(err);
@@ -34,11 +39,11 @@ router.delete("/:id", async (req, res, next) => {
   try {
     const token = req.headers.authorization;
 
-    const application = await Application.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
+    const user = await User.findByToken(token);
+    const app = req.params.id;
+    const id = user.Applications[app].id;
+
+    let application = await Application.findOne({ where: { id } });
 
     // const user = await User.findByToken(token);
 
@@ -50,6 +55,31 @@ router.delete("/:id", async (req, res, next) => {
     next(err);
   }
 });
+router.patch("/:id", async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+
+    const user = await User.findByToken(token);
+    const app = req.params.id;
+    const id = user.Applications[app].id;
+
+    let application = await Application.findOne({ where: { id } });
+    const newapplication = req.body.changes;
+    console.log(newapplication);
+
+    application.update(newapplication);
+    console.log(application);
+
+    res.send(application);
+  } catch (err) {
+    if (err.name === "SequelizeUniqueConstraintError") {
+      res.status(401).send("User already exists");
+    } else {
+      next(err);
+    }
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const token = req.headers.authorization;

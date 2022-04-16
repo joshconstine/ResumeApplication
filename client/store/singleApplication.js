@@ -3,6 +3,7 @@ import axios from "axios";
 const initialState = {};
 
 const SET_APPLICATION = "SET_APPLICATION";
+const UPDATE_APPLICATION = "UPDATE_APPLICATION";
 
 export const setApplication = (application) => {
   return {
@@ -26,6 +27,27 @@ export const fetchApplication = (id) => {
     }
   };
 };
+
+export const updateSingleApplication = (application, id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.patch(
+        `/api/applications/${id}`,
+        application,
+        {
+          headers: {
+            Authorization: window.localStorage.getItem("token"),
+            id: id,
+          },
+        }
+      );
+      await dispatch(setApplication(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 // Take a look at app/redux/index.js to see where this reducer is
 // added to the Redux store with combineReducers
 export default function applicationReducer(application = initialState, action) {

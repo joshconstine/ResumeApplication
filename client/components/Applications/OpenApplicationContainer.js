@@ -11,7 +11,10 @@ import { deleteApplication, fetchApplications } from "../../store/application";
 export const OpenApplicationsContainer = (props) => {
   const history = useHistory();
   const applications = useSelector((state) => state.auth.Applications);
+  const singleApplication = useSelector((state) => state.selectedApplication);
   const dispatch = useDispatch();
+
+  useEffect(() => {}, [applications]);
 
   function renderApplications(applications) {
     if (applications.length === 0) {
@@ -19,13 +22,12 @@ export const OpenApplicationsContainer = (props) => {
     } else {
       return applications.map((application, i) => {
         return (
-          <Link to={`/application/${i}`} key={i}>
-            <OpenApplicationRow
-              companyName={application.companyName}
-              jobTitle={application.positionName}
-              id={application.id}
-            />
-          </Link>
+          <OpenApplicationRow
+            key={i}
+            companyName={application.companyName}
+            jobTitle={application.positionName}
+            id={i}
+          />
         );
       });
     }
@@ -33,21 +35,16 @@ export const OpenApplicationsContainer = (props) => {
 
   return (
     <Box className="theme twothirdContainer">
-      {/* {applications ? (
-        applications.map((application, i) => {
-          return (
-            <OpenApplicationRow
-              companyName={application.companyName}
-              jobTitle={application.positionName}
-              id={application.id}
-              key={i}
-            />
-          );
-        })
-      ) : (
-        <>no applications</>
-      )} */}
-      {renderApplications(applications)}
+      {applications.map((application, i) => {
+        return (
+          <OpenApplicationRow
+            key={i}
+            companyName={application.companyName}
+            jobTitle={application.positionName}
+            id={i}
+          />
+        );
+      })}
     </Box>
   );
 };

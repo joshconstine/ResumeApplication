@@ -36,7 +36,11 @@ export const setApplications = (applications) => {
 export const fetchApplications = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("/api/applications");
+      const { data } = await axios.get("/api/applications", {
+        headers: {
+          Authorization: window.localStorage.getItem("token"),
+        },
+      });
       dispatch(setApplications(data));
     } catch (err) {
       console.log(err);
