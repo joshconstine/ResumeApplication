@@ -11,6 +11,7 @@ import MeetTheCreator from "./components/Navbars/Footer/MeetTheCreator";
 import About from "./components/Navbars/Footer/About";
 import CreateApplication from "./components/Applications/CreateApplication";
 import Goal from "./components/Applications/Goal";
+import SingleApplication from "./components/Applications/SingleApplication";
 /**
  * COMPONENT
  */
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route path="/creator" component={MeetTheCreator} />
             <Route path="/createApplication" component={CreateApplication} />
             <Route path="/goal" component={Goal} />
+            <Route path="/application/:id" component={SingleApplication} />
 
             <Redirect to="/home" />
           </Switch>

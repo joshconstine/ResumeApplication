@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
 import OpenApplicationRow from "./OpenApplicationRow";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { deleteApplication, fetchApplications } from "../../store/application";
 
 /**
@@ -19,12 +19,13 @@ export const OpenApplicationsContainer = (props) => {
     } else {
       return applications.map((application, i) => {
         return (
-          <OpenApplicationRow
-            companyName={application.companyName}
-            jobTitle={application.positionName}
-            id={application.id}
-            key={i}
-          />
+          <Link to={`/application/${i}`} key={i}>
+            <OpenApplicationRow
+              companyName={application.companyName}
+              jobTitle={application.positionName}
+              id={application.id}
+            />
+          </Link>
         );
       });
     }

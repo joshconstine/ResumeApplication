@@ -14,6 +14,21 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+router.get("/:id", async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+
+    const user = await User.findByToken(token);
+    const app = req.params.id;
+    console.log(app);
+    const id = user.Applications[app].id;
+
+    const application = await Application.findOne({ where: { id } });
+    res.send(application);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.delete("/:id", async (req, res, next) => {
   try {
