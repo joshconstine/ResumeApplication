@@ -10,10 +10,8 @@ const Goal = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const goal = {
-      goalRef: goalRef.current.value,
-    };
-    await dispatch(fetchCreateGoal(goal));
+
+    await dispatch(fetchCreateGoal(goalRef.current.value));
   }
   const fourms = [{ text: "Goal", ref: goalRef }];
 
