@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
 import OpenApplicationRow from "./OpenApplicationRow";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { deleteApplication, fetchApplications } from "../../store/application";
 
 /**
@@ -11,7 +11,10 @@ import { deleteApplication, fetchApplications } from "../../store/application";
 export const OpenApplicationsContainer = (props) => {
   const history = useHistory();
   const applications = useSelector((state) => state.auth.Applications);
+  const singleApplication = useSelector((state) => state.selectedApplication);
   const dispatch = useDispatch();
+
+  useEffect(() => {}, [applications]);
 
   function renderApplications(applications) {
     if (applications.length === 0) {
@@ -20,10 +23,10 @@ export const OpenApplicationsContainer = (props) => {
       return applications.map((application, i) => {
         return (
           <OpenApplicationRow
+            key={i}
             companyName={application.companyName}
             jobTitle={application.positionName}
-            id={application.id}
-            key={i}
+            id={i}
           />
         );
       });
@@ -32,21 +35,16 @@ export const OpenApplicationsContainer = (props) => {
 
   return (
     <Box className="theme twothirdContainer">
-      {/* {applications ? (
-        applications.map((application, i) => {
-          return (
-            <OpenApplicationRow
-              companyName={application.companyName}
-              jobTitle={application.positionName}
-              id={application.id}
-              key={i}
-            />
-          );
-        })
-      ) : (
-        <>no applications</>
-      )} */}
-      {renderApplications(applications)}
+      {applications.map((application, i) => {
+        return (
+          <OpenApplicationRow
+            key={i}
+            companyName={application.companyName}
+            jobTitle={application.positionName}
+            id={i}
+          />
+        );
+      })}
     </Box>
   );
 };

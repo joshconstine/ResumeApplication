@@ -10,6 +10,9 @@ import TemplatesHome from "./components/Templates/TemplatesHome";
 import MeetTheCreator from "./components/Navbars/Footer/MeetTheCreator";
 import About from "./components/Navbars/Footer/About";
 import CreateApplication from "./components/Applications/CreateApplication";
+import Goal from "./components/Applications/Goal";
+import SingleApplication from "./components/Applications/SingleApplication";
+import EditApplication from "./components/Applications/EditApplication";
 /**
  * COMPONENT
  */
@@ -33,6 +36,9 @@ class Routes extends Component {
             <Route path="/about" component={About} />
             <Route path="/creator" component={MeetTheCreator} />
             <Route path="/createApplication" component={CreateApplication} />
+            <Route path="/goal" component={Goal} />
+            <Route path="/application/:id" component={SingleApplication} />
+            <Route path="/edit/application/:id" component={EditApplication} />
 
             <Redirect to="/home" />
           </Switch>
