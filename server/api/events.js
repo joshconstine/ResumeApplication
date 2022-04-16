@@ -31,26 +31,26 @@ router.get("/", async (req, res, next) => {
 //   }
 // });
 
-// router.delete("/:id", async (req, res, next) => {
-//   try {
-//     const token = req.headers.authorization;
+router.delete("/:id", async (req, res, next) => {
+  try {
+    // const token = req.headers.authorization;
+    const id = req.params.id;
+    // const user = await User.findByToken(token);
+    // const app = req.params.id;
+    // const id = user.Applications[app].id;
 
-//     const user = await User.findByToken(token);
-//     const app = req.params.id;
-//     const id = user.Applications[app].id;
+    let event = await Event.findOne({ where: { id } });
 
-//     let application = await Application.findOne({ where: { id } });
+    // const user = await User.findByToken(token);
 
-//     // const user = await User.findByToken(token);
+    // await user.removeApplication(application);
 
-//     // await user.removeApplication(application);
-
-//     application.destroy();
-//     res.send(application);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    event.destroy();
+    res.send(event);
+  } catch (err) {
+    next(err);
+  }
+});
 // router.patch("/:id", async (req, res, next) => {
 //   try {
 //     const token = req.headers.authorization;

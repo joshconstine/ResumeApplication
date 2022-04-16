@@ -61,6 +61,7 @@ export const fetchCreateEvent = (event, id, history) => {
       //   const { message } = await axios.post("/api/sms/event", event);
       dispatch(await createEvent(created));
       dispatch(await me());
+      
     } catch (err) {
       console.log(err);
     }

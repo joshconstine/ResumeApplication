@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { fetchCreateEvent } from "../../store/event";
+import { useHistory } from "react-router-dom";
 
 const addEvent = (props) => {
   let eventNameRef = useRef("");
@@ -9,6 +10,8 @@ const addEvent = (props) => {
   let eventTimeRef = useRef();
   let notesRef = useRef();
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const id = props.match.params.id;
 
   async function handleSubmit(e) {
@@ -19,6 +22,7 @@ const addEvent = (props) => {
       notes: notesRef.current.value,
     };
     await dispatch(fetchCreateEvent(event, id));
+    history.push(`/application/${props.match.params.id}`);
   }
   const fourms = [
     { text: "Event Name", ref: eventNameRef },
