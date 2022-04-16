@@ -19,10 +19,10 @@ export const EditApplication = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [companyName, setCompanyName] = useState();
-  const [positionName, setPositionName] = useState();
-  const [positionDescription, setPositionDescription] = useState();
-  const [websiteUrl, setWebsiteUrl] = useState();
+  const [companyName, setCompanyName] = useState("");
+  const [positionName, setPositionName] = useState("");
+  const [positionDescription, setPositionDescription] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
 
   const changes = () => {
     return {
@@ -51,6 +51,7 @@ export const EditApplication = (props) => {
     };
     dispatch(updateSingleApplication(updatedApplication, id)).then(() => {});
     dispatch(fetchApplications());
+    history.push(`/applications`);
   };
 
   //   const handleDelete = async () => {
@@ -61,28 +62,28 @@ export const EditApplication = (props) => {
     <div>
       <input
         type="text"
-        value={companyName}
+        value={companyName || ""}
         onChange={(event) => {
           setCompanyName(event.target.value);
         }}
       />
       <input
         type="text"
-        value={positionName}
+        value={positionName || ""}
         onChange={(event) => {
           setPositionName(event.target.value);
         }}
       />
       <input
         type="text"
-        value={positionDescription}
+        value={positionDescription || ""}
         onChange={(event) => {
           setPositionDescription(event.target.value);
         }}
       />
       <input
         type="text"
-        value={websiteUrl}
+        value={websiteUrl || ""}
         onChange={(event) => {
           setWebsiteUrl(event.target.value);
         }}
