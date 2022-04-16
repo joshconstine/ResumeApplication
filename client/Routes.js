@@ -13,6 +13,8 @@ import CreateApplication from "./components/Applications/CreateApplication";
 import Goal from "./components/Applications/Goal";
 import SingleApplication from "./components/Applications/SingleApplication";
 import EditApplication from "./components/Applications/EditApplication";
+import AddEvent from "./components/Events/AddEvent";
+import EventsHome from "./components/Events/EventsHome";
 /**
  * COMPONENT
  */
@@ -30,13 +32,14 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/applications" component={ApplicationHome} />
-            <Route path="/tasks" component={Home} />
+            <Route path="/events" component={EventsHome} />
             <Route path="/templates" component={TemplatesHome} />
             <Route path="/calendar" component={CalendarHome} />
             <Route path="/about" component={About} />
             <Route path="/creator" component={MeetTheCreator} />
             <Route path="/createApplication" component={CreateApplication} />
             <Route path="/goal" component={Goal} />
+            <Route path="/addEvent/:id" component={AddEvent} />
             <Route path="/application/:id" component={SingleApplication} />
             <Route path="/edit/application/:id" component={EditApplication} />
 

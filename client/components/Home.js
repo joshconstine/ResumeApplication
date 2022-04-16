@@ -40,7 +40,7 @@ export const Home = (props) => {
           <Button onClick={() => history.push("/calendar")}>Calendar</Button>
         </Box>
         <Box className="homeScreenOption">
-          s<Button onClick={() => history.push("/tasks")}>Tasks</Button>
+          <Button onClick={() => history.push("/events")}>Events</Button>
         </Box>
         <Box className="homeScreenOption">
           <Button onClick={() => history.push("/templates")}>Templates</Button>

@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 const Application = require("./Application");
+const Event = require("./Event");
 
 const SALT_ROUNDS = 5;
 
@@ -59,7 +60,7 @@ User.findByToken = async function (token) {
       where: {
         id,
       },
-      include: [{ model: Application }],
+      include: [{ model: Event }, { model: Application }],
     });
     if (!user) {
       throw "nooo";
