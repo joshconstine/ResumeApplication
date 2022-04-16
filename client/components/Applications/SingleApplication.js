@@ -17,6 +17,7 @@ const SingleApplication = (props) => {
 
   function handleSubmit() {
     console.log("submit");
+    history.push(`/addEvent`);
   }
   function editClick() {
     console.log("edit");

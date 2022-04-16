@@ -13,6 +13,7 @@ import CreateApplication from "./components/Applications/CreateApplication";
 import Goal from "./components/Applications/Goal";
 import SingleApplication from "./components/Applications/SingleApplication";
 import EditApplication from "./components/Applications/EditApplication";
+import AddEvent from "./components/Events/AddEvent";
 /**
  * COMPONENT
  */
@@ -37,6 +38,7 @@ class Routes extends Component {
             <Route path="/creator" component={MeetTheCreator} />
             <Route path="/createApplication" component={CreateApplication} />
             <Route path="/goal" component={Goal} />
+            <Route path="/addEvent" component={AddEvent} />
             <Route path="/application/:id" component={SingleApplication} />
             <Route path="/edit/application/:id" component={EditApplication} />
 
