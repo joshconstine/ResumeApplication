@@ -59,7 +59,7 @@ User.findByToken = async function (token) {
       where: {
         id,
       },
-      include: [{ model: Application }],
+      include: [{ model: Application  }],
     });
     if (!user) {
       throw "nooo";

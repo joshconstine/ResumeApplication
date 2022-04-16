@@ -48,12 +48,13 @@ export const fetchEvents = () => {
   };
 };
 
-export const fetchCreateEvent = (event, history) => {
+export const fetchCreateEvent = (event, id, history) => {
   return async (dispatch) => {
     try {
       const { data: created } = await axios.post("/api/events", event, {
         headers: {
           Authorization: window.localStorage.getItem("token"),
+          id: id,
         },
       });
       //addevent route **************************

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const dispatch = require("dispatch");
 const { Application } = require("../db");
-const { User } = require("../db");
+const { User, Event } = require("../db");
 const sendMessage = require("./sms");
 
 module.exports = router;
@@ -28,7 +28,10 @@ router.get("/:id", async (req, res, next) => {
     console.log(app);
     const id = user.Applications[app].id;
 
-    const application = await Application.findOne({ where: { id } });
+    const application = await Application.findOne({
+      where: { id },
+      include: [{ model: Event }],
+    });
     res.send(application);
   } catch (err) {
     next(err);
@@ -43,7 +46,9 @@ router.delete("/:id", async (req, res, next) => {
     const app = req.params.id;
     const id = user.Applications[app].id;
 
-    let application = await Application.findOne({ where: { id } });
+    let application = await Application.findOne({
+      where: { id },
+    });
 
     // const user = await User.findByToken(token);
 

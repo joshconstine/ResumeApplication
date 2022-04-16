@@ -38,7 +38,7 @@ class Routes extends Component {
             <Route path="/creator" component={MeetTheCreator} />
             <Route path="/createApplication" component={CreateApplication} />
             <Route path="/goal" component={Goal} />
-            <Route path="/addEvent" component={AddEvent} />
+            <Route path="/addEvent/:id" component={AddEvent} />
             <Route path="/application/:id" component={SingleApplication} />
             <Route path="/edit/application/:id" component={EditApplication} />
 

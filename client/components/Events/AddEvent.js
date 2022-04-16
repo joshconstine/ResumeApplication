@@ -3,22 +3,22 @@ import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { fetchCreateEvent } from "../../store/event";
 
-const addEvent = () => {
+const addEvent = (props) => {
   let eventNameRef = useRef("");
   let eventDateRef = useRef();
   let eventTimeRef = useRef();
   let notesRef = useRef();
   const dispatch = useDispatch();
+  const id = props.match.params.id;
 
   async function handleSubmit(e) {
     e.preventDefault();
     const event = {
       eventName: eventNameRef.current.value,
-      eventDate: eventDateRef.current.value,
-      eventTime: eventTimeRef.current.value,
+      eventDate: new Date().toISOString(),
       notes: notesRef.current.value,
     };
-    await dispatch(fetchCreateEvent(event));
+    await dispatch(fetchCreateEvent(event, id));
   }
   const fourms = [
     { text: "Event Name", ref: eventNameRef },
