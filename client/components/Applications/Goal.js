@@ -3,7 +3,7 @@ import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
 import { fetchCreateApplication } from "../../store/application";
 import { useDispatch } from "react-redux";
 
-const CreateApplication = () => {
+const Goal = () => {
   let companyNameRef = useRef("");
   let positionNameRef = useRef();
   let positionDescriptionRef = useRef();
@@ -32,7 +32,7 @@ const CreateApplication = () => {
 
   return (
     <Box className="twothirdContainer theme">
-      <h1>create application</h1>
+      <h1>Goal</h1>
       <Box className="column">
         {fourms.map((fourm, i) => {
           return (
@@ -51,4 +51,4 @@ const CreateApplication = () => {
   );
 };
 
-export default CreateApplication;
+export default Goal;

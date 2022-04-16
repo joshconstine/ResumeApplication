@@ -12,6 +12,9 @@ export const ApplicationActions = (props) => {
       <Link to={"/createApplication"}>
         <Box className="actions">Add Application</Box>
       </Link>
+      <Link to={"/goal"}>
+        <Box className="actions">Add Goal</Box>
+      </Link>
       <Box className="actions">Historic Applications</Box>
     </Box>
   );

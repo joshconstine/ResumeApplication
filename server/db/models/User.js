@@ -16,6 +16,10 @@ const User = db.define("user", {
   phoneNumber: {
     type: Sequelize.STRING,
   },
+  goal: {
+    type: Sequelize.STRING,
+  },
+
   password: {
     type: Sequelize.STRING,
   },
