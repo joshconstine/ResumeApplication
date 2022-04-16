@@ -40,8 +40,6 @@ router.patch("/goal", requireToken, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     const goal = req.headers.goal;
-    console.log("headders", req.headers);
-    console.log("goal____________", goal);
 
     user.update({ goal });
     console.log(user);

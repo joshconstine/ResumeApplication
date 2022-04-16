@@ -7,7 +7,6 @@ const CreateApplication = () => {
   let companyNameRef = useRef("");
   let positionNameRef = useRef();
   let positionDescriptionRef = useRef();
-  let positionDateRef = useRef();
   let websiteURLRef = useRef();
   const dispatch = useDispatch();
 
@@ -17,7 +16,7 @@ const CreateApplication = () => {
       companyName: companyNameRef.current.value,
       positionName: positionNameRef.current.value,
       positionDescription: positionDescriptionRef.current.value,
-      positionDate: positionDateRef.current.value,
+      appliedAt: new Date().toISOString(),
       websiteURL: websiteURLRef.current.value,
     };
     await dispatch(fetchCreateApplication(application));
@@ -26,7 +25,6 @@ const CreateApplication = () => {
     { text: "Company Name", ref: companyNameRef },
     { text: "Position Name", ref: positionNameRef },
     { text: "Position Description", ref: positionDescriptionRef },
-    { text: "Date", ref: positionDateRef },
     { text: "Website Url:", ref: websiteURLRef },
   ];
 

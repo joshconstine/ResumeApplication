@@ -30,7 +30,6 @@ export const me = () => async (dispatch) => {
 
 export const fetchCreateGoal = (goal) => async (dispatch) => {
   try {
-    console.log("in fetch", goal);
     const res = await axios.patch(`/auth/goal`, goal, {
       headers: {
         Authorization: window.localStorage.getItem("token"),

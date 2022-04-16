@@ -19,7 +19,7 @@ const Application = db.define("Application", {
   positionDescription: {
     type: DataTypes.STRING,
   },
-  positionDate: {
+  appliedAt: {
     type: DataTypes.STRING,
   },
   websiteURL: {

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export const ApplicationActions = (props) => {
   return (
     <Box className="optionsRow">
-      <Box className="actions">2 more applications</Box>
+      <Box className="actions">{props.goal} more applications</Box>
       <Link to={"/createApplication"}>
         <Box className="actions">Add Application</Box>
       </Link>
@@ -26,6 +26,7 @@ export const ApplicationActions = (props) => {
 const mapState = (state) => {
   return {
     username: state.auth.username,
+    goal: state.auth.goal,
   };
 };
 

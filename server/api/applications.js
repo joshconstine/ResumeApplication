@@ -41,6 +41,8 @@ router.post("/", async (req, res, next) => {
 
     const createdApplication = await Application.create(req.body);
 
+    console.log("created application", createdApplication);
+
     const user = await User.findByToken(token);
 
     await user.addApplication(createdApplication);

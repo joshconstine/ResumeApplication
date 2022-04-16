@@ -24,7 +24,7 @@ async function seed() {
       companyName: "Facebook",
       positionName: "fullstackdeveloper",
       positionDescription: "lear and grow as an individual",
-      positionDate: "03/20/2022",
+      appliedAt: "03/20/2022",
       websiteURL: "www.facebook.com",
     }),
   ]);
