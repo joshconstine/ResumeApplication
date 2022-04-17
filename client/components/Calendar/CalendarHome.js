@@ -10,30 +10,10 @@ export const CalendarHome = (props) => {
   const history = useHistory();
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <h3>Welcome, {username}</h3>
-      <Box
-        sx={{
-          width: "90%",
-          height: 500,
-          display: "flex",
-          justifyContent: "space-evenly",
-          flexWrap: "wrap",
-          padding: 5,
-        }}
-        className="theme"
-      >
-        calender
-      </Box>
-    </Box>
+    <div>
+      <div id="calendar"></div>;
+      {/* <FullCalendar initialView="dayGridMonth" /> */}
+    </div>
   );
 };
 
