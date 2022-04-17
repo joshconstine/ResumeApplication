@@ -1,34 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../../store";
+import { useHistory, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import {
+  Container,
+  Box,
+  Typography,
+  Avatar,
+  TextField,
+  Button,
+} from "@mui/material";
 
 /**
  * COMPONENT
  */
 const Login = (props) => {
   const { name, displayName, handleSubmit, error } = props;
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-    </div>
+    <Container>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography variant="h4">Log In</Typography>
+
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            id="email"
+            label="Email"
+            name="email"
+            variant="filled"
+            margin="normal"
+            fullWidth
+            required
+            autoComplete="email"
+            autoFocus
+            error={!!emailError}
+            helperText={emailError}
+          />
+
+          <TextField
+            id="password"
+            label="Password"
+            name="password"
+            variant="filled"
+            margin="normal"
+            fullWidth
+            required
+            autoComplete="current-password"
+            type="password"
+            error={!!passwordError}
+            helperText={passwordError}
+          />
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign In
+          </Button>
+          <Link to="/signup" variant="body2">
+            Don't have an account? Sign Up
+          </Link>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
@@ -51,10 +101,10 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
-      const formName = evt.target.name;
-      const username = evt.target.username.value;
+
+      const username = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(username, password, formName));
+      dispatch(authenticate(username, password, "login"));
     },
   };
 };
