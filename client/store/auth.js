@@ -36,6 +36,21 @@ export const fetchCreateGoal = (goal) => async (dispatch) => {
         Goal: goal,
       },
     });
+    history.push("/applications");
+    dispatch(me());
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }));
+  }
+};
+
+export const updateUser = (user) => async (dispatch) => {
+  try {
+    const res = await axios.patch(`/auth/me`, user, {
+      headers: {
+        Authorization: window.localStorage.getItem("token"),
+      },
+    });
+    history.push("/profile");
     dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
@@ -46,6 +61,9 @@ export const authenticate = (email, password, method) => async (dispatch) => {
   try {
     const res = await axios.post(`/auth/${method}`, { email, password });
     window.localStorage.setItem(TOKEN, res.data.token);
+    if (method === "signup") {
+      history.push("/profile");
+    }
     dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
