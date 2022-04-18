@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
 import { fetchCreateApplication } from "../../store/application";
 import { useDispatch } from "react-redux";
@@ -30,6 +30,37 @@ const CreateApplication = () => {
     { text: "Position Description", ref: positionDescriptionRef },
     { text: "Website Url:", ref: websiteURLRef },
   ];
+  useEffect(() => {
+    const droparea = document.getElementById("droparea");
+
+    ["dragenter", "dragover", "dragleave", "drop"].forEach((evtName) => {
+      droparea.addEventListener(evtName, prevents);
+    });
+
+    ["dragenter", "dragover"].forEach((evtName) => {
+      droparea.addEventListener(evtName, active);
+    });
+
+    ["dragleave", "drop"].forEach((evtName) => {
+      droparea.addEventListener(evtName, inactive);
+    });
+
+    droparea.addEventListener("drop", handleDrop);
+  }, []);
+
+  const active = () => droparea.classList.add("green-border");
+
+  const inactive = () => droparea.classList.remove("green-border");
+
+  const prevents = (e) => e.preventDefault();
+
+  const handleDrop = (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    const fileArray = [...files];
+    console.log(files); // FileList
+    console.log(fileArray);
+  };
 
   return (
     <Box className="twothirdContainer theme">
@@ -45,7 +76,12 @@ const CreateApplication = () => {
             </Box>
           );
         })}
-
+        <Box>
+          <Box className="droparea" id="droparea">
+            <i className="far fa-images"></i>
+            <p>Add Resume/Cover letter here</p>
+          </Box>
+        </Box>
         <Button onClick={(e) => handleSubmit(e)}>submit</Button>
       </Box>
     </Box>
