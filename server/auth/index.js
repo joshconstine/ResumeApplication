@@ -62,3 +62,13 @@ router.get("/me", async (req, res, next) => {
     next(ex);
   }
 });
+
+router.patch("/me", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    user.update(req.body);
+    res.send(user);
+  } catch (ex) {
+    next(ex);
+  }
+});
