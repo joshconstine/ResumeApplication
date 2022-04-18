@@ -52,10 +52,5 @@ export const OpenApplicationsContainer = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    username: state.auth.username,
-  };
-};
 
-export default connect(mapState)(OpenApplicationsContainer);
+export default OpenApplicationsContainer;

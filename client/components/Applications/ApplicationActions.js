@@ -25,7 +25,6 @@ export const ApplicationActions = (props) => {
  */
 const mapState = (state) => {
   return {
-    username: state.auth.username,
     goal: state.auth.goal,
   };
 };

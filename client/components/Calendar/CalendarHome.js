@@ -6,9 +6,6 @@ import { useHistory } from "react-router-dom";
  * COMPONENT
  */
 export const CalendarHome = (props) => {
-  const { username } = props;
-  const history = useHistory();
-
   return (
     <div>
       <div id="calendar"></div>;
@@ -20,10 +17,5 @@ export const CalendarHome = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    username: state.auth.username,
-  };
-};
 
-export default connect(mapState)(CalendarHome);
+export default CalendarHome;
