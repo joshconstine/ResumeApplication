@@ -33,7 +33,7 @@ export const Home = (props) => {
       >
         <Box className="homeScreenOption">
           <Button onClick={() => history.push("/applications")}>
-            Applications
+            My Applications
           </Button>
         </Box>
         <Box className="homeScreenOption">

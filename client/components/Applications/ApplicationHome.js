@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, Container } from "@mui/material";
 import OpenApplicationsContainer from "./OpenApplicationContainer";
 import ApplicationActions from "./ApplicationActions";
 import { fontFamily } from "@mui/system";
@@ -13,7 +13,6 @@ export const ApplicationHome = (props) => {
   return (
     <Box
       sx={{
-        width: "100%",
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
@@ -21,23 +20,11 @@ export const ApplicationHome = (props) => {
         flexWrap: "wrap",
       }}
     >
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "space-center",
-        }}
-      >
-        <Box sx={{ display: "flex" }}>
-          <Typography sx={{ width: "49%", fontFamily: "Fantasy" }} variant="h3">
-            Applications{" "}
-          </Typography>
-          <ApplicationActions />
-        </Box>
-        <OpenApplicationsContainer />
-      </Box>
+      <Typography sx={{ fontFamily: "Fantasy", margin: 5 }} variant="h3">
+        My Applications
+      </Typography>
+      <ApplicationActions />
+      <OpenApplicationsContainer />
     </Box>
   );
 };
