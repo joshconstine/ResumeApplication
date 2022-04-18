@@ -102,9 +102,9 @@ const mapDispatch = (dispatch) => {
     handleSubmit(evt) {
       evt.preventDefault();
 
-      const username = evt.target.email.value;
+      const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(username, password, "login"));
+      dispatch(authenticate(email, password, "login"));
     },
   };
 };

@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
  * COMPONENT
  */
 export const Home = (props) => {
-  const { username } = props;
   const history = useHistory();
 
   return (
@@ -19,7 +18,6 @@ export const Home = (props) => {
         alignItems: "center",
       }}
     >
-      <h3>Welcome, {username}</h3>
       <Box
         sx={{
           width: "90%",
@@ -50,13 +48,4 @@ export const Home = (props) => {
   );
 };
 
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    username: state.auth.username,
-  };
-};
-
-export default connect(mapState)(Home);
+export default Home;

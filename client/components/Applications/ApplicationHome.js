@@ -8,8 +8,6 @@ import { fontFamily } from "@mui/system";
  * COMPONENT
  */
 export const ApplicationHome = (props) => {
-  const { username } = props;
-
   return (
     <Box
       sx={{
@@ -32,10 +30,5 @@ export const ApplicationHome = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    username: state.auth.username,
-  };
-};
 
-export default connect(mapState)(ApplicationHome);
+export default ApplicationHome;

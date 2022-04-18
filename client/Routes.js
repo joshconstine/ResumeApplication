@@ -16,6 +16,7 @@ import AddEvent from "./components/Events/AddEvent";
 import EventsHome from "./components/Events/EventsHome";
 import Login from "./components/User/Login";
 import SignUp from "./components/User/SignUp";
+import Profile from "./components/User/Profile";
 /**
  * COMPONENT
  */
@@ -40,6 +41,7 @@ class Routes extends Component {
             <Route path="/creator" component={MeetTheCreator} />
             <Route path="/createApplication" component={CreateApplication} />
             <Route path="/goal" component={Goal} />
+            <Route path="/profile" component={Profile} />
             <Route path="/addEvent/:id" component={AddEvent} />
             <Route path="/application/:id" component={SingleApplication} />
             <Route path="/edit/application/:id" component={EditApplication} />

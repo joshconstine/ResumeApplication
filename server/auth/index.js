@@ -17,6 +17,8 @@ const requireToken = async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   try {
+    const { email, password } = req.body;
+
     res.send({ token: await User.authenticate(req.body) });
   } catch (err) {
     next(err);

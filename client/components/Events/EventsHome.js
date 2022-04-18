@@ -5,8 +5,6 @@ import { Box, Button, Typography } from "@mui/material";
  * COMPONENT
  */
 export const EventsHome = (props) => {
-  const { username } = props;
-
   return (
     <Box
       sx={{
@@ -40,10 +38,5 @@ export const EventsHome = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    username: state.auth.username,
-  };
-};
 
-export default connect(mapState)(EventsHome);
+export default EventsHome;
