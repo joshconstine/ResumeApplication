@@ -1,30 +1,32 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import EditUser from "./EditUser";
 import { useHistory, Link } from "react-router-dom";
 import { TextField, Typography, Box, Button } from "@mui/material";
+import { updateUser, me } from "../../store/auth";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth);
 
-  const [view, setView] = useState("");
+  const [firstName, setFirstName] = useState(user.firstName || "");
+  const [lastName, setLastName] = useState(user.lastName || "");
+  const [email, setEmail] = useState(user.email);
+  const [phoneNumber, setphoneNumber] = useState(user.phoneNumber || "");
+
+  const dispatch = useDispatch();
   const history = useHistory();
 
-  const currentView = (view) => {
-    switch (view) {
-      case "edit":
-        return <EditUser />;
-      default:
-        return <></>;
-    }
-  };
-
-  const handleView = (newView) => {
-    if (newView === view) {
-      setView("");
-    } else {
-      setView(newView);
-    }
+  const handleUpdate = () => {
+    const updatedUser = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+    };
+    console.log(updatedUser);
+    dispatch(updateUser(updatedUser)).then(() => {
+      dispatch(me());
+    });
   };
 
   return (
@@ -32,10 +34,16 @@ const Profile = () => {
       sx={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-between",
+        marginTop: 5,
       }}
     >
-      <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" />
+      <Box sx={{ borderRadius: "25%" }}>
+        <img
+          className="circle"
+          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+        />
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -43,33 +51,51 @@ const Profile = () => {
           alignItems: "center",
         }}
       >
-        <h3>
-          Hello, {user.firstName} {user.lastName}!
-        </h3>
-        <h4>Email: {user.email}</h4>
-        <h4>Phone: {user.phoneNumber}</h4>
-        <Link to="/applications">
-          <h4>open Applications: {user.Applications.length}</h4>
-        </Link>
-
+        <TextField
+          sx={{ paddingBottom: "2rem" }}
+          label="First Name"
+          type="text"
+          value={firstName}
+          onChange={(event) => {
+            setFirstName(event.target.value);
+          }}
+        />
+        <TextField
+          sx={{ paddingBottom: "2rem" }}
+          label="Last Name"
+          type="text"
+          value={lastName}
+          onChange={(event) => {
+            setLastName(event.target.value);
+          }}
+        />
+        <TextField
+          sx={{ paddingBottom: "2rem" }}
+          label="Email"
+          type="text"
+          value={email}
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+        />
+        <TextField
+          sx={{ paddingBottom: "2rem" }}
+          label="Phone Number"
+          type="text"
+          value={phoneNumber}
+          onChange={(event) => {
+            setphoneNumber(event.target.value);
+          }}
+        />
         <Button
           size="large"
           variant="contained"
-          style={{ marginBottom: "2rem" }}
-        >
-          Past applications
-        </Button>
-        <Button
-          size="large"
-          variant="contained"
-          style={{ marginBottom: "2rem" }}
           onClick={() => {
-            handleView("edit");
+            handleUpdate();
           }}
         >
-          Edit User
+          update
         </Button>
-        <div>{currentView(view)}</div>
       </Box>
     </Box>
   );

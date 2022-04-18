@@ -116,3 +116,6 @@ form div {
 .green-border {
   border-color: green;
 }
+.circle {
+  border-radius: 50%;
+}
