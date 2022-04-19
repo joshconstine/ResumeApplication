@@ -8,7 +8,16 @@ import {
   signOut,
 } from "firebase/auth";
 import { uid } from "uid";
-import { ref, set, onValue, remove, get } from "firebase/database";
+import {
+  ref,
+  set,
+  onValue,
+  remove,
+  get,
+  onChildAdded,
+  onChildChanged,
+  onChildRemoved,
+} from "firebase/database";
 import { ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
 import { setApplications } from "../store/application";
 
@@ -54,6 +63,7 @@ export function AuthProvider({ children }) {
   }, []);
   useEffect(() => {
     read();
+    // addlistner();
   }, [currentUser]);
 
   async function signup(email, password) {
@@ -133,16 +143,14 @@ export function AuthProvider({ children }) {
       });
   }
   async function read() {
-    console.log("in read", currentUser);
     if (currentUser) {
       const str = currentUser.uid || "";
-      console.log(str);
       let userApplicationsReff = ref(
         database,
         "users/" + str + "/applications"
       );
       onValue(userApplicationsReff, async (snapshot) => {
-        setApplications([]);
+        await cleardata();
         const data = await snapshot.val();
         if (data !== null) {
           Object.values(data).map((application) => {
@@ -153,26 +161,8 @@ export function AuthProvider({ children }) {
       console.log("applications after map", usersApplications);
     }
   }
-  async function addlistner() {
-    console.log("in read", currentUser);
-    if (currentUser) {
-      const str = currentUser.uid || "";
-      console.log(str);
-      let userApplicationsReff = ref(
-        database,
-        "users/" + str + "/applications"
-      );
-      onValue(userApplicationsReff, (snapshot) => {
-        setApplications([]);
-        const data = snapshot.val();
-        if (data !== null) {
-          Object.values(data).map((application) => {
-            setUsersApplications((oldArray) => [...oldArray, application]);
-          });
-        }
-        console.log(usersApplications);
-      });
-    }
+  async function cleardata() {
+    await setUsersApplications([]);
   }
 
   async function writeApplicationData(application) {

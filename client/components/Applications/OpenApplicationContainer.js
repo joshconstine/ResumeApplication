@@ -11,26 +11,10 @@ import { useAuth } from "../../contexts/authContext";
 export const OpenApplicationsContainer = (props) => {
   const { usersApplications } = useAuth();
 
-  useEffect(() => {}, [usersApplications]);
-  function renderApplications(applications) {
-    if (usersApplications.length === 0) {
-      return <h1>no open applications</h1>;
-    } else {
-      return usersApplications.map((application, i) => {
-        return (
-          <OpenApplicationRow
-            key={i}
-            companyName={application.companyName}
-            jobTitle={application.positionName}
-            id={i}
-          />
-        );
-      });
-    }
-  }
+  console.log("renderd applications", usersApplications);
 
   return (
-    <Box className="theme twothirdContainer">
+    <Box className="">
       {usersApplications.map((application, i) => {
         return (
           <OpenApplicationRow
