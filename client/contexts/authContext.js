@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth, database } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { uid } from "uid";
+import { ref, set, onValue, remove, get } from "firebase/database";
 
 //
 const AuthContext = React.createContext();
@@ -50,6 +51,7 @@ export function AuthProvider({ children }) {
         email,
         password
       );
+      writeUserData();
     } catch (error) {
       console.log(error.message);
     }
@@ -75,12 +77,21 @@ export function AuthProvider({ children }) {
 
     return unsubscribe;
   }, []);
+  function writeUserData() {
+    var userReff = ref(database, "users/" + currentUser.uid + "/userinfo");
+    var user = {
+      uid: currentUser.uid,
+      email: currentUser.email,
+    };
+    set(userReff, user);
+  }
 
   const value = {
     currentUser,
     login,
     signup,
     logout,
+    writeUserData,
   };
 
   return (

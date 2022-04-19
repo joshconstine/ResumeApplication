@@ -5,9 +5,11 @@ import { useHistory, Link } from "react-router-dom";
 import { TextField, Typography, Box, Button } from "@mui/material";
 import { updateUser, me, addPhoto } from "../../store/auth";
 import Goal from "../Applications/Goal";
+import { useAuth } from "../../contexts/authContext";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth);
+  const { currentUser, writeUserData } = useAuth();
   const [firstName, setFirstName] = useState(user.firstName || "");
   const [lastName, setLastName] = useState(user.lastName || "");
   const [email, setEmail] = useState(user.email);
@@ -15,6 +17,7 @@ const Profile = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  console.log("curusr", currentUser);
 
   const handleUpdate = () => {
     const updatedUser = {
@@ -72,6 +75,15 @@ const Profile = () => {
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
         />
         <p>drag over to add a photo</p>
+        <Button
+          size="large"
+          variant="contained"
+          onClick={() => {
+            writeUserData();
+          }}
+        >
+          write data
+        </Button>
       </Box>
       <Box className="column">
         <TextField
