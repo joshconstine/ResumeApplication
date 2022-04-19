@@ -3,24 +3,19 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
 import OpenApplicationRow from "./OpenApplicationRow";
 import { useHistory, Link } from "react-router-dom";
-import { deleteApplication, fetchApplications } from "../../store/application";
+import { useAuth } from "../../contexts/authContext";
 
 /**
  * COMPONENT
  */
 export const OpenApplicationsContainer = (props) => {
-  const history = useHistory();
-  const applications = [];
-  const singleApplication = useSelector((state) => state.selectedApplication);
-  const dispatch = useDispatch();
-
-  useEffect(() => {}, [applications]);
+  const { usersApplications } = useAuth();
 
   function renderApplications(applications) {
-    if (applications.length === 0) {
+    if (usersApplications.length === 0) {
       return <h1>no open applications</h1>;
     } else {
-      return applications.map((application, i) => {
+      return usersApplications.map((application, i) => {
         return (
           <OpenApplicationRow
             key={i}
@@ -35,13 +30,13 @@ export const OpenApplicationsContainer = (props) => {
 
   return (
     <Box className="theme twothirdContainer">
-      {applications.map((application, i) => {
+      {usersApplications.map((application, i) => {
         return (
           <OpenApplicationRow
             key={i}
             companyName={application.companyName}
             jobTitle={application.positionName}
-            id={i}
+            id={application.uid}
           />
         );
       })}

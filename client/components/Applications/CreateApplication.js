@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
-import { fetchCreateApplication } from "../../store/application";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";

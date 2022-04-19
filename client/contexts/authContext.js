@@ -10,6 +10,7 @@ import {
 import { uid } from "uid";
 import { ref, set, onValue, remove, get } from "firebase/database";
 import { ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import { setApplications } from "../store/application";
 
 //
 const AuthContext = React.createContext();
@@ -39,8 +40,21 @@ export function AuthProvider({ children }) {
   var [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [usersApplications, setUsersApplications] = useState([]);
+  const [selectedApplication, setselectedApplication] = useState({});
 
   const history = useHistory();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+
+    return unsubscribe;
+  }, []);
+  useEffect(() => {
+    read();
+  }, [currentUser]);
 
   async function signup(email, password) {
     try {
@@ -71,14 +85,6 @@ export function AuthProvider({ children }) {
     return auth.signOut();
   }
 
-  useEffect(async () => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
   function writeUserData() {
     var userReff = ref(database, "users/" + currentUser.uid + "/userinfo");
     var user = {
@@ -126,6 +132,27 @@ export function AuthProvider({ children }) {
         // Handle any errors
       });
   }
+  async function read() {
+    console.log("in read", currentUser);
+    if (currentUser) {
+      const str = currentUser.uid || "";
+      console.log(str);
+      let userApplicationsReff = ref(
+        database,
+        "users/" + str + "/applications"
+      );
+      onValue(userApplicationsReff, (snapshot) => {
+        setApplications([]);
+        const data = snapshot.val();
+        if (data !== null) {
+          Object.values(data).map((application) => {
+            setUsersApplications((oldArray) => [...oldArray, application]);
+          });
+        }
+      });
+    }
+    return;
+  }
 
   async function writeApplicationData(application) {
     const uuid = uid();
@@ -139,6 +166,14 @@ export function AuthProvider({ children }) {
     });
     console.log("set new application in database");
   }
+  async function updateSelectedApplication(uid) {
+    usersApplications.map((application) => {
+      if (application.uid === uid) {
+        setselectedApplication(application);
+        console.log("updated seledted application", selectedApplication);
+      }
+    });
+  }
 
   const value = {
     currentUser,
@@ -149,6 +184,9 @@ export function AuthProvider({ children }) {
     addPhoto,
     getPhoto,
     writeApplicationData,
+    usersApplications,
+    updateSelectedApplication,
+    selectedApplication,
   };
 
   return (
