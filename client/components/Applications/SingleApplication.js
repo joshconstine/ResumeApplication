@@ -4,17 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchApplication } from "../../store/singleApplication.js";
 import { useHistory } from "react-router-dom";
 import { fetchDeleteEvent } from "../../store/event";
+import { useAuth } from "../../contexts/authContext";
 
 const SingleApplication = (props) => {
   const history = useHistory();
-  const selectedApplication = useSelector((state) => state.selectedApplication);
+  const { updateSelectedApplication, selectedApplication } = useAuth();
 
   const applicationId = props.match.params.id;
+  console.log(updateSelectedApplication(applicationId));
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchApplication(applicationId));
-  }, []);
 
   function handleSubmit() {
     console.log("submit");

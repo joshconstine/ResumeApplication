@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Box, Button, Typography, AppBar } from "@mui/material";
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 /**
  * COMPONENT
@@ -20,9 +20,6 @@ export const ApplicationActions = (props) => {
   );
 };
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     goal: state.auth.goal,

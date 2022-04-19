@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {
-  fetchApplication,
-  updateSingleApplication,
-} from "../../store/singleApplication";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+
 import { useHistory } from "react-router-dom";
-import {
-  fetchApplications,
-  fetchDeleteApplication,
-} from "../../store/application";
-import { me } from "../../store/auth";
+
+import { useAuth } from "../../contexts/authContext";
 
 export const EditApplication = (props) => {
   const id = props.match.params.id;
-
-  const applicaiton = useSelector((state) => state.selectedApplication);
-  const dispatch = useDispatch();
+  const { selectedApplication, updateSingleApplication } = useAuth();
+  const applicaiton = selectedApplication;
   const history = useHistory();
 
   const [companyName, setCompanyName] = useState("");
@@ -34,10 +25,6 @@ export const EditApplication = (props) => {
   };
 
   useEffect(() => {
-    dispatch(fetchApplication(id));
-  }, []);
-
-  useEffect(() => {
     setCompanyName(applicaiton.companyName);
     setPositionName(applicaiton.positionName);
     setPositionDescription(applicaiton.positionDescription);
@@ -46,17 +33,17 @@ export const EditApplication = (props) => {
 
   const handleUpdate = () => {
     const updatedApplication = {
-      id,
-      changes: changes(),
+      uid: id,
+      companyName: companyName,
+      positionName: positionName,
+      positionDescription: positionDescription,
+      appliedAt: selectedApplication.appliedAt,
+      websiteUrl: websiteUrl,
     };
-    dispatch(updateSingleApplication(updatedApplication, id)).then(() => {});
-    dispatch(fetchApplications());
+    updateSingleApplication(updatedApplication, id);
+
     history.push(`/applications`);
   };
-
-  //   const handleDelete = async () => {
-  //     await dispatch(fetchDeleteApplication(id));
-  //   };
 
   return (
     <div>
@@ -95,13 +82,7 @@ export const EditApplication = (props) => {
       >
         Submit Changes
       </button>
-      {/* <button
-        onClick={() => {
-          handleDelete();
-        }}
-      >
-        Delete Buddy
-      </button> */}
+
       <hr />
     </div>
   );

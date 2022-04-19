@@ -1,6 +1,15 @@
 import axios from "axios";
 import history from "../history";
-
+import { ref, set, getStorage, uploadBytes } from "firebase/storage";
+import { storage } from "../firebase";
+import { uid } from "uid";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+import { auth } from "../firebase";
 const TOKEN = "token";
 
 /**
@@ -36,7 +45,6 @@ export const fetchCreateGoal = (goal) => async (dispatch) => {
         Goal: goal,
       },
     });
-    history.push("/applications");
     dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
@@ -50,21 +58,30 @@ export const updateUser = (user) => async (dispatch) => {
         Authorization: window.localStorage.getItem("token"),
       },
     });
-    history.push("/profile");
-    dispatch(me());
+    history.push("/home");
+    // dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
 };
 
-export const authenticate = (email, password, method) => async (dispatch) => {
+export const login = (email, password) => async (dispatch) => {
   try {
-    const res = await axios.post(`/auth/${method}`, { email, password });
-    window.localStorage.setItem(TOKEN, res.data.token);
-    if (method === "signup") {
-      history.push("/profile");
-    }
-    dispatch(me());
+    const user = await signInWithEmailAndPassword(auth, email, password);
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }));
+  }
+};
+export const signup = (email, password) => async (dispatch) => {
+  try {
+    const createdUser = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    console.log(createdUser);
+    history.push("/profile");
+    dispatch(setAuth(createdUser));
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
@@ -78,10 +95,18 @@ export const logout = () => {
     auth: {},
   };
 };
+export const addPhoto = (img) => {
+  const imgref = ref(storage, "joshimg.jpg");
+  uploadBytes(imgref, img).then((snapshot) => {
+    console.log("Uploaded a blob or file!", img);
+  });
+  return {};
+};
 
 /**
  * REDUCER
  */
+
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
