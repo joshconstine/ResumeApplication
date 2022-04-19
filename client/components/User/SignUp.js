@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
-import { authenticate } from "../../store";
+import { signup } from "../../store";
 
 /**
  * COMPONENT
@@ -134,7 +134,7 @@ const mapDispatch = (dispatch) => {
       evt.preventDefault();
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(email, password, "signup"));
+      dispatch(signup(email, password));
     },
   };
 };
