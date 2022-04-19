@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Button } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+} from "@mui/material";
 import {
   fetchApplications,
   fetchDeleteApplication,
@@ -17,41 +24,17 @@ const OpenApplicationRow = (props) => {
   }
 
   return (
-    <Box
-      sx={{
-        width: "95%",
-        height: 100,
-        backgroundColor: "gray",
-        margin: 2,
-        padding: 2,
-        display: "flex",
-        alignItems: "center",
-        borderRadius: 5,
-
-        justifyContent: " space-between",
-      }}
-    >
-      <Box
-        sx={{
-          width: "80%",
-          height: 75,
-          backgroundColor: "white",
-          borderRadius: 5,
-          padding: 2,
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
+    <Card sx={{ width: 345, margin: 5 }}>
+      <CardContent>
         <Link to={`/application/${props.id}`}>
           <Box className="companyInfo theme">{props.companyName}</Box>
         </Link>
-        <Box className="companyInfo theme">{props.jobTitle}</Box>
-        <Box className="companyInfo theme">4/19/2022</Box>
-      </Box>
-      <Box>
+        <Typography variant="p">{props.jobTitle}</Typography>
+      </CardContent>
+      <CardActions>
         <Button onClick={handleDelete}>delete</Button>
-      </Box>
-    </Box>
+      </CardActions>
+    </Card>
   );
 };
 
