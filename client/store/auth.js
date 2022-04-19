@@ -36,7 +36,6 @@ export const fetchCreateGoal = (goal) => async (dispatch) => {
         Goal: goal,
       },
     });
-    history.push("/applications");
     dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));

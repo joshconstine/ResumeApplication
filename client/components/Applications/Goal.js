@@ -1,7 +1,14 @@
 import React, { useRef } from "react";
-import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  Input,
+  Typography,
+} from "@mui/material";
 import { fetchCreateGoal } from "../../store/auth";
-import { useDispatch } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 
 const Goal = () => {
   let goalRef = useRef("");
@@ -16,9 +23,13 @@ const Goal = () => {
   const fourms = [{ text: "Goal", ref: goalRef }];
 
   return (
-    <Box className="twothirdContainer theme">
-      <h1>Goal</h1>
-      <Box className="column">you currently dont have any goals set!</Box>
+    <Box>
+      <Typography variant="h6" className="regFont">
+        Job search Goal
+      </Typography>
+      <Box className=" regFont column">
+        you currently dont have any goals set!
+      </Box>
       <Box sx={{ display: "flex" }}>
         <Box className="column">
           {fourms.map((fourm, i) => {
