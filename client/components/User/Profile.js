@@ -23,7 +23,6 @@ const Profile = () => {
       email,
       phoneNumber,
     };
-    console.log(updatedUser);
     dispatch(updateUser(updatedUser)).then(() => {
       dispatch(me());
     });
