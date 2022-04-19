@@ -3,6 +3,7 @@ import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
 import { fetchCreateApplication } from "../../store/application";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
 
 const CreateApplication = () => {
   let companyNameRef = useRef("");
@@ -11,6 +12,7 @@ const CreateApplication = () => {
   let websiteURLRef = useRef();
   const dispatch = useDispatch();
   const history = useHistory();
+  const { writeApplicationData } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,7 +23,7 @@ const CreateApplication = () => {
       appliedAt: new Date().toISOString(),
       websiteURL: websiteURLRef.current.value,
     };
-    await dispatch(fetchCreateApplication(application));
+    await writeApplicationData(application);
     history.push("/applications");
   }
   const fourms = [

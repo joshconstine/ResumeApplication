@@ -10,7 +10,7 @@ import { deleteApplication, fetchApplications } from "../../store/application";
  */
 export const OpenApplicationsContainer = (props) => {
   const history = useHistory();
-  const applications = useSelector((state) => state.auth.Applications);
+  const applications = [];
   const singleApplication = useSelector((state) => state.selectedApplication);
   const dispatch = useDispatch();
 

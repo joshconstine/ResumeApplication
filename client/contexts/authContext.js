@@ -38,6 +38,7 @@ export function AuthProvider({ children }) {
     */
   var [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [usersApplications, setUsersApplications] = useState([]);
 
   const history = useHistory();
 
@@ -126,6 +127,19 @@ export function AuthProvider({ children }) {
       });
   }
 
+  async function writeApplicationData(application) {
+    const uuid = uid();
+    set(ref(database, "users/" + currentUser.uid + "/applications/" + uuid), {
+      companyName: application.companyName,
+      positionName: application.positionName,
+      positionDescription: application.positionDescription,
+      appliedAt: application.appliedAt,
+      websiteURL: application.websiteURL,
+      uid: uuid,
+    });
+    console.log("set new application in database");
+  }
+
   const value = {
     currentUser,
     login,
@@ -134,6 +148,7 @@ export function AuthProvider({ children }) {
     writeUserData,
     addPhoto,
     getPhoto,
+    writeApplicationData,
   };
 
   return (
