@@ -3,25 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import EditUser from "./EditUser";
 import { useHistory, Link } from "react-router-dom";
 import { TextField, Typography, Box, Button } from "@mui/material";
-import { updateUser, me } from "../../store/auth";
+import { updateUser, me, addPhoto } from "../../store/auth";
 import Goal from "../Applications/Goal";
-import { ref, set, getStorage, uploadBytes } from "firebase/storage";
-import { storage } from "../../firebase";
 
-const PROFILE_IMG = "profileImg";
 const Profile = () => {
   const user = useSelector((state) => state.auth);
   const [firstName, setFirstName] = useState(user.firstName || "");
   const [lastName, setLastName] = useState(user.lastName || "");
   const [email, setEmail] = useState(user.email);
   const [phoneNumber, setphoneNumber] = useState(user.phoneNumber || "");
-  const [profileImg, setprofileImg] = useState();
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleUpdate = () => {
-    console.log("in update ", profileImg);
     const updatedUser = {
       firstName,
       lastName,
@@ -48,16 +43,6 @@ const Profile = () => {
     });
 
     droparea.addEventListener("drop", handleDrop);
-    async function fetchImg() {
-      try {
-        const img = await window.localStorage.getItem(PROFILE_IMG);
-        setprofileImg(img);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    fetchImg();
-    console.log("in use effect ", profileImg);
   }, []);
   const active = () => droparea.classList.add("green-border");
 
@@ -65,20 +50,11 @@ const Profile = () => {
 
   const prevents = (e) => e.preventDefault();
 
-  const imgref = ref(storage, "joshimg.jpg");
   const handleDrop = (e) => {
     const dt = e.dataTransfer;
     const files = dt.files;
     const fileArray = [...files];
-    console.log(files); // FileList
-    console.log(fileArray);
-    console.log("target", e.target.src);
-    console.log(fileArray[0].name);
-    window.localStorage.setItem(PROFILE_IMG, fileArray[0].name);
-    // 'file' comes from the Blob or File API
-    uploadBytes(imgref, fileArray[0]).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-    });
+    addPhoto(fileArray[0]);
   };
   return (
     <Box
