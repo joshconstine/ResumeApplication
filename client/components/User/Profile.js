@@ -5,11 +5,12 @@ import { useHistory, Link } from "react-router-dom";
 import { TextField, Typography, Box, Button } from "@mui/material";
 import { updateUser, me } from "../../store/auth";
 import Goal from "../Applications/Goal";
+import { ref, set, getStorage, uploadBytes } from "firebase/storage";
+import { storage } from "../../firebase";
 
 const PROFILE_IMG = "profileImg";
 const Profile = () => {
   const user = useSelector((state) => state.auth);
-
   const [firstName, setFirstName] = useState(user.firstName || "");
   const [lastName, setLastName] = useState(user.lastName || "");
   const [email, setEmail] = useState(user.email);
@@ -64,6 +65,7 @@ const Profile = () => {
 
   const prevents = (e) => e.preventDefault();
 
+  const imgref = ref(storage, "joshimg.jpg");
   const handleDrop = (e) => {
     const dt = e.dataTransfer;
     const files = dt.files;
@@ -73,6 +75,10 @@ const Profile = () => {
     console.log("target", e.target.src);
     console.log(fileArray[0].name);
     window.localStorage.setItem(PROFILE_IMG, fileArray[0].name);
+    // 'file' comes from the Blob or File API
+    uploadBytes(imgref, fileArray[0]).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    });
   };
   return (
     <Box
