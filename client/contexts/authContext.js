@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { auth, database } from "../firebase";
+import { auth, database, storage } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import { uid } from "uid";
 import { ref, set, onValue, remove, get } from "firebase/database";
+import { ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 //
 const AuthContext = React.createContext();
@@ -85,6 +86,45 @@ export function AuthProvider({ children }) {
     };
     set(userReff, user);
   }
+  function addPhoto(img) {
+    const uuid = uid();
+    const imgref = sRef(
+      storage,
+      "users/" + currentUser.uid + "/photos/" + "profilepic"
+    );
+    uploadBytes(imgref, img).then((snapshot) => {
+      console.log("Uploaded a blob or file!", img);
+    });
+
+    return {};
+  }
+
+  function getPhoto(img) {
+    const imgref = sRef(
+      storage,
+      "users/" + currentUser.uid + "/photos/" + "profilepic"
+    );
+    console.log("in getphoto");
+    getDownloadURL(sRef(storage, imgref))
+      .then((url) => {
+        // `url` is the download URL for 'images/stars.jpg'
+
+        // This can be downloaded directly:
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "blob";
+        xhr.onload = (event) => {
+          const blob = xhr.response;
+        };
+        xhr.open("GET", url);
+        xhr.send();
+
+        // Or inserted into an <img> element
+        img.setAttribute("src", url);
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+  }
 
   const value = {
     currentUser,
@@ -92,6 +132,8 @@ export function AuthProvider({ children }) {
     signup,
     logout,
     writeUserData,
+    addPhoto,
+    getPhoto,
   };
 
   return (
