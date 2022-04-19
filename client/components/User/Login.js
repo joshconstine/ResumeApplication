@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { authenticate } from "../../store";
+import { login } from "../../store";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -104,7 +104,7 @@ const mapDispatch = (dispatch) => {
 
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(email, password, "login"));
+      dispatch(login(email, password));
     },
   };
 };
