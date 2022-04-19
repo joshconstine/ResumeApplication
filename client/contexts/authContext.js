@@ -141,6 +141,27 @@ export function AuthProvider({ children }) {
         database,
         "users/" + str + "/applications"
       );
+      onValue(userApplicationsReff, async (snapshot) => {
+        setApplications([]);
+        const data = await snapshot.val();
+        if (data !== null) {
+          Object.values(data).map((application) => {
+            setUsersApplications((oldArray) => [...oldArray, application]);
+          });
+        }
+      });
+      console.log("applications after map", usersApplications);
+    }
+  }
+  async function addlistner() {
+    console.log("in read", currentUser);
+    if (currentUser) {
+      const str = currentUser.uid || "";
+      console.log(str);
+      let userApplicationsReff = ref(
+        database,
+        "users/" + str + "/applications"
+      );
       onValue(userApplicationsReff, (snapshot) => {
         setApplications([]);
         const data = snapshot.val();
@@ -149,9 +170,9 @@ export function AuthProvider({ children }) {
             setUsersApplications((oldArray) => [...oldArray, application]);
           });
         }
+        console.log(usersApplications);
       });
     }
-    return;
   }
 
   async function writeApplicationData(application) {
@@ -161,7 +182,7 @@ export function AuthProvider({ children }) {
       positionName: application.positionName,
       positionDescription: application.positionDescription,
       appliedAt: application.appliedAt,
-      websiteURL: application.websiteURL,
+      websiteUrl: application.websiteURL,
       uid: uuid,
     });
     console.log("set new application in database");
@@ -173,6 +194,24 @@ export function AuthProvider({ children }) {
         console.log("updated seledted application", selectedApplication);
       }
     });
+  }
+  async function updateSingleApplication(updatedApplication, id) {
+    var applicationRef = ref(
+      database,
+      "users/" + currentUser.uid + "/applications/" + id
+    );
+    console.log(applicationRef);
+
+    set(applicationRef, updatedApplication);
+  }
+  async function deleteApplication(id) {
+    var applicationRef = ref(
+      database,
+      "users/" + currentUser.uid + "/applications/" + id
+    );
+    console.log(applicationRef);
+
+    remove(applicationRef);
   }
 
   const value = {
@@ -187,6 +226,9 @@ export function AuthProvider({ children }) {
     usersApplications,
     updateSelectedApplication,
     selectedApplication,
+    updateSingleApplication,
+    read,
+    deleteApplication,
   };
 
   return (

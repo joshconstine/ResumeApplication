@@ -11,6 +11,7 @@ import { useAuth } from "../../contexts/authContext";
 export const OpenApplicationsContainer = (props) => {
   const { usersApplications } = useAuth();
 
+  useEffect(() => {}, [usersApplications]);
   function renderApplications(applications) {
     if (usersApplications.length === 0) {
       return <h1>no open applications</h1>;
