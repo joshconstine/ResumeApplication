@@ -32,6 +32,7 @@
     "dispatch": "^1.0.2",
     "dotenv": "^16.0.0",
     "express": "^4.16.4",
+    "firebase": "^9.6.11",
     "fullcalendar": "^5.11.0",
     "history": "4.10.1",
     "jsonwebtoken": "^8.5.1",
