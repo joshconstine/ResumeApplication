@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchApplication } from "../../store/singleApplication.js";
 import { useHistory } from "react-router-dom";
-import { fetchDeleteEvent } from "../../store/event";
 import { useAuth } from "../../contexts/authContext";
 
 const SingleApplication = (props) => {

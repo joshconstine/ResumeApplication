@@ -8,20 +8,9 @@ import {
   signOut,
 } from "firebase/auth";
 import { uid } from "uid";
-import {
-  ref,
-  set,
-  onValue,
-  remove,
-  get,
-  onChildAdded,
-  onChildChanged,
-  onChildRemoved,
-} from "firebase/database";
+import { ref, set, onValue, remove } from "firebase/database";
 import { ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
-import { setApplications } from "../store/application";
 
-//
 const AuthContext = React.createContext();
 
 export function useAuth() {
