@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,9 +17,12 @@ const firebaseConfig = {
   messagingSenderId: "569992602427",
   appId: "1:569992602427:web:15065d0b16aea6c1a6cd1e",
   measurementId: "G-GRZQ9451V8",
+  databaseURL: "https://resumeapplication-942fd-default-rtdb.firebaseio.com/",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const storage = getStorage(app);
+export const auth = getAuth(app);
+export const database = getDatabase();

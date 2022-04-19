@@ -3,11 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import EditUser from "./EditUser";
 import { useHistory, Link } from "react-router-dom";
 import { TextField, Typography, Box, Button } from "@mui/material";
-import { updateUser, me, addPhoto } from "../../store/auth";
+import { updateUser, me } from "../../store/auth";
 import Goal from "../Applications/Goal";
+import { useAuth } from "../../contexts/authContext";
+import { ref, set, getStorage, uploadBytes } from "firebase/storage";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth);
+  const { currentUser, writeUserData, addPhoto, getPhoto } = useAuth();
   const [firstName, setFirstName] = useState(user.firstName || "");
   const [lastName, setLastName] = useState(user.lastName || "");
   const [email, setEmail] = useState(user.email);
@@ -15,6 +18,7 @@ const Profile = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  console.log("curusr", currentUser);
 
   const handleUpdate = () => {
     const updatedUser = {
@@ -56,6 +60,11 @@ const Profile = () => {
     const fileArray = [...files];
     addPhoto(fileArray[0]);
   };
+  const fetchPhoto = (e) => {
+    const img = document.getElementById("droparea");
+
+    getPhoto(img);
+  };
   return (
     <Box
       sx={{
@@ -72,6 +81,24 @@ const Profile = () => {
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
         />
         <p>drag over to add a photo</p>
+        <Button
+          size="large"
+          variant="contained"
+          onClick={() => {
+            writeUserData();
+          }}
+        >
+          write data
+        </Button>
+        <Button
+          size="large"
+          variant="contained"
+          onClick={() => {
+            fetchPhoto();
+          }}
+        >
+          getPhoto
+        </Button>
       </Box>
       <Box className="column">
         <TextField

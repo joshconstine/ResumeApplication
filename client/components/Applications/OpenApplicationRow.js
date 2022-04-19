@@ -1,19 +1,16 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
-import {
-  fetchApplications,
-  fetchDeleteApplication,
-} from "../../store/application";
+
 import { useHistory, Link } from "react-router-dom";
 
 import { connect, useSelector, useDispatch } from "react-redux";
+import { useAuth } from "../../contexts/authContext";
 
 const OpenApplicationRow = (props) => {
   const dispatch = useDispatch();
-
+  const { deleteApplication } = useAuth();
   async function handleDelete() {
-    await dispatch(fetchDeleteApplication(props.id));
-    await dispatch(fetchApplications());
+    deleteApplication(props.id);
   }
 
   return (

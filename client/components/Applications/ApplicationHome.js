@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { connect, useSelector, useDispatch } from "react-redux";
-import { Box, Button, Typography, Container } from "@mui/material";
+import React from "react";
+import { Box, Typography } from "@mui/material";
 import OpenApplicationsContainer from "./OpenApplicationContainer";
 import ApplicationActions from "./ApplicationActions";
-import { fontFamily } from "@mui/system";
 /**
  * COMPONENT
  */
