@@ -46,8 +46,24 @@ const Goal = () => {
           </Box>
         </>
       ) : (
-        <Box className=" regFont column">
-          current goal {goal} applications per day
+        <Box>
+          <Box className=" regFont column">
+            current goal {goal} applications per day
+          </Box>
+          <Box className="column">
+            <Box>
+              <FormControl>
+                <InputLabel htmlFor="Name">update goal</InputLabel>
+                <Input
+                  aria-describedby="my-helper-text"
+                  inputRef={fourm.ref}
+                  defaultValue={goal}
+                />
+              </FormControl>
+            </Box>
+
+            <Button onClick={(e) => handleSubmit(e)}>submit</Button>
+          </Box>
         </Box>
       )}
       <Box sx={{ display: "flex" }}></Box>
