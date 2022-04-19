@@ -66,21 +66,24 @@ export const login = (email, password) => async (dispatch) => {
     return dispatch(setAuth({ error: authError }));
   }
 };
-export const signup = (email, password) => async (dispatch) => {
-  try {
-    const res = await axios.post(`/auth/signup`, {
-      email,
-      password,
-    });
+export const signup =
+  (email, password, firstName, lastName) => async (dispatch) => {
+    try {
+      const res = await axios.post(`/auth/signup`, {
+        email,
+        password,
+        firstName,
+        lastName,
+      });
 
-    window.localStorage.setItem(TOKEN, res.data.token);
+      window.localStorage.setItem(TOKEN, res.data.token);
 
-    history.push("/profile");
-    dispatch(me());
-  } catch (authError) {
-    return dispatch(setAuth({ error: authError }));
-  }
-};
+      history.push("/profile");
+      dispatch(me());
+    } catch (authError) {
+      return dispatch(setAuth({ error: authError }));
+    }
+  };
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);

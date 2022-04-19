@@ -134,7 +134,9 @@ const mapDispatch = (dispatch) => {
       evt.preventDefault();
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(signup(email, password));
+      const firstName = evt.target.firstName.value;
+      const lastName = evt.target.lastName.value;
+      dispatch(signup(email, password, firstName, lastName));
     },
   };
 };
