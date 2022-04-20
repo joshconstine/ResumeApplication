@@ -9,11 +9,9 @@ import {
 } from "@mui/material";
 import { useHistory, Link } from "react-router-dom";
 
-import { connect, useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../../contexts/authContext";
 
 const OpenApplicationRow = (props) => {
-  const dispatch = useDispatch();
   const { deleteApplication } = useAuth();
   async function handleDelete() {
     deleteApplication(props.id);

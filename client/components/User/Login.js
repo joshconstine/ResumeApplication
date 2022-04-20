@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
-import { login } from "../../contexts/authContext";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAuth } from "../../contexts/authContext";

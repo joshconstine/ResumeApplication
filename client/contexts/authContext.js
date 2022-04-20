@@ -39,6 +39,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [usersApplications, setUsersApplications] = useState([]);
   const [selectedApplication, setselectedApplication] = useState({});
+  const [userInfo, setUserInfo] = useState({});
 
   const history = useHistory();
 
@@ -147,11 +148,19 @@ export function AuthProvider({ children }) {
           });
         }
       });
+      let userInfoRef = ref(database, "users/" + str + "/userinfo");
+      onValue(userInfoRef, (snapshot) => {
+        const data = snapshot.val();
+
+        setUserInfo(data);
+      });
+
       console.log("applications after map", usersApplications);
     }
   }
   async function cleardata() {
     await setUsersApplications([]);
+    await setUserInfo({});
   }
 
   async function writeApplicationData(application) {
@@ -178,7 +187,7 @@ export function AuthProvider({ children }) {
     console.log("set new application in database");
   }
   async function updateSelectedApplication(uid) {
-    usersApplications.map((application) => {
+    await usersApplications.map((application) => {
       if (application.uid === uid) {
         setselectedApplication(application);
       }
@@ -211,6 +220,18 @@ export function AuthProvider({ children }) {
 
     remove(eventRef);
   }
+  function addPhoto(img) {
+    const imgref = ref(storage, "joshimg.jpg");
+    uploadBytes(imgref, img).then((snapshot) => {
+      console.log("Uploaded a blob or file!", img);
+    });
+    return {};
+  }
+  function updateUser(user) {
+    var userReff = ref(database, "users/" + currentUser.uid + "/userinfo");
+    setUserInfo(user);
+    set(userReff, user);
+  }
 
   const value = {
     currentUser,
@@ -229,6 +250,8 @@ export function AuthProvider({ children }) {
     deleteApplication,
     addEvent,
     deleteEvent,
+    updateUser,
+    userInfo,
   };
 
   return (

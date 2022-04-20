@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 
@@ -9,7 +8,6 @@ const CreateApplication = () => {
   let positionNameRef = useRef();
   let positionDescriptionRef = useRef();
   let websiteURLRef = useRef();
-  const dispatch = useDispatch();
   const history = useHistory();
   const { writeApplicationData } = useAuth();
 

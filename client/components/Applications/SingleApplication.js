@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 
@@ -11,10 +10,8 @@ const SingleApplication = (props) => {
 
   const applicationId = props.match.params.id;
   console.log(updateSelectedApplication(applicationId));
-  const dispatch = useDispatch();
 
   function handleSubmit() {
-    console.log("submit");
     history.push(`/addEvent/${applicationId}`);
   }
   async function handleDelete(e, id) {

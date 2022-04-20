@@ -7,12 +7,10 @@ import {
   Input,
   Typography,
 } from "@mui/material";
-import { connect, useSelector, useDispatch } from "react-redux";
 
 const Goal = () => {
   let goalRef = useRef("");
   const goal = "";
-  const dispatch = useDispatch();
 
   async function handleSubmit(e) {
     e.preventDefault();
