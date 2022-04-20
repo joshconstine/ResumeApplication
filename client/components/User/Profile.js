@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import EditUser from "./EditUser";
 import { useHistory, Link } from "react-router-dom";
 import { TextField, Typography, Box, Button } from "@mui/material";
-import { updateUser, me } from "../../store/auth";
 import Goal from "../Applications/Goal";
 import { useAuth } from "../../contexts/authContext";
 import { ref, set, getStorage, uploadBytes } from "firebase/storage";
+import { ControlPointSharp } from "@mui/icons-material";
 
 const Profile = () => {
-  const user = useSelector((state) => state.auth);
-  const { currentUser, writeUserData, addPhoto, getPhoto } = useAuth();
-  const [firstName, setFirstName] = useState(user.firstName || "");
-  const [lastName, setLastName] = useState(user.lastName || "");
-  const [email, setEmail] = useState(user.email);
-  const [phoneNumber, setphoneNumber] = useState(user.phoneNumber || "");
+  const {
+    currentUser,
+    writeUserData,
+    addPhoto,
+    getPhoto,
+    updateUser,
+    userInfo,
+    profilePic,
+  } = useAuth();
+  const user = userInfo;
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    setFirstName(userInfo?.firstName || "");
+    setLastName(userInfo?.lastName || "");
+    setEmail(userInfo?.email || "");
+    setphoneNumber(userInfo?.phoneNumber || "");
+    fetchPhoto();
+  }, [userInfo]);
   const history = useHistory();
-  console.log("curusr", currentUser);
 
   const handleUpdate = () => {
     const updatedUser = {
@@ -26,10 +37,9 @@ const Profile = () => {
       lastName,
       email,
       phoneNumber,
+      uid: currentUser.uid,
     };
-    dispatch(updateUser(updatedUser)).then(() => {
-      dispatch(me());
-    });
+    updateUser(updatedUser);
   };
   useEffect(() => {
     const droparea = document.getElementById("droparea");
@@ -58,11 +68,12 @@ const Profile = () => {
     const dt = e.dataTransfer;
     const files = dt.files;
     const fileArray = [...files];
+    console.log(fileArray[0]);
     addPhoto(fileArray[0]);
   };
+
   const fetchPhoto = (e) => {
     const img = document.getElementById("droparea");
-
     getPhoto(img);
   };
   return (
@@ -74,7 +85,7 @@ const Profile = () => {
         marginTop: 5,
       }}
     >
-      <Box sx={{ borderRadius: "25%" }} className="column">
+      <Box sx={{ borderRadius: "25%" }} className="column photo">
         <img
           id="droparea"
           className="circle"

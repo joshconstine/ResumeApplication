@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export const ApplicationActions = (props) => {
   return (
     <Box className="optionsRow">
-      <Box className="actions">{props.goal} more applications</Box>
+      {/* <Box className="actions">{props.goal} more applications</Box> */}
       <Link to={"/createApplication"}>
         <Box className="actions">Add Application</Box>
       </Link>
@@ -20,10 +20,4 @@ export const ApplicationActions = (props) => {
   );
 };
 
-const mapState = (state) => {
-  return {
-    goal: state.auth.goal,
-  };
-};
-
-export default connect(mapState)(ApplicationActions);
+export default ApplicationActions;

@@ -10,6 +10,7 @@ import {
 import { uid } from "uid";
 import { ref, set, onValue, remove } from "firebase/database";
 import { ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import Compressor from "compressorjs";
 
 const AuthContext = React.createContext();
 
@@ -39,6 +40,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [usersApplications, setUsersApplications] = useState([]);
   const [selectedApplication, setselectedApplication] = useState({});
+  const [userInfo, setUserInfo] = useState({});
+  const [profilePic, setProfilePic] = useState({});
 
   const history = useHistory();
 
@@ -93,11 +96,34 @@ export function AuthProvider({ children }) {
     set(userReff, user);
   }
   function addPhoto(img) {
+    console.log("in add photo");
     const uuid = uid();
     const imgref = sRef(
       storage,
       "users/" + currentUser.uid + "/photos/" + "profilepic"
     );
+
+    new Compressor(img, {
+      quality: 0.6,
+
+      // The compression process is asynchronous,
+      // which means you have to access the `result` in the `success` hook function.
+      success(result) {
+        const formData = new FormData();
+
+        // The third parameter is required for server
+        formData.append("file", result, result.name);
+
+        // Send the compressed image file to server with XMLHttpRequest.
+        console.log(img);
+        // axios.post("/path/to/upload", formData).then(() => {
+        //   console.log("Upload success");
+        // });
+      },
+      error(err) {
+        console.log(err.message);
+      },
+    });
     uploadBytes(imgref, img).then((snapshot) => {
       console.log("Uploaded a blob or file!", img);
     });
@@ -110,20 +136,10 @@ export function AuthProvider({ children }) {
       storage,
       "users/" + currentUser.uid + "/photos/" + "profilepic"
     );
-    console.log("in getphoto");
     getDownloadURL(sRef(storage, imgref))
       .then((url) => {
         // `url` is the download URL for 'images/stars.jpg'
-
-        // This can be downloaded directly:
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "blob";
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-        };
-        xhr.open("GET", url);
-        xhr.send();
-
+        setProfilePic(url);
         // Or inserted into an <img> element
         img.setAttribute("src", url);
       })
@@ -147,11 +163,18 @@ export function AuthProvider({ children }) {
           });
         }
       });
+      let userInfoRef = ref(database, "users/" + str + "/userinfo");
+      onValue(userInfoRef, (snapshot) => {
+        const data = snapshot.val();
+        setUserInfo(data);
+      });
+
       console.log("applications after map", usersApplications);
     }
   }
   async function cleardata() {
     await setUsersApplications([]);
+    await setUserInfo({});
   }
 
   async function writeApplicationData(application) {
@@ -178,7 +201,7 @@ export function AuthProvider({ children }) {
     console.log("set new application in database");
   }
   async function updateSelectedApplication(uid) {
-    usersApplications.map((application) => {
+    await usersApplications.map((application) => {
       if (application.uid === uid) {
         setselectedApplication(application);
       }
@@ -212,6 +235,12 @@ export function AuthProvider({ children }) {
     remove(eventRef);
   }
 
+  function updateUser(user) {
+    var userReff = ref(database, "users/" + currentUser.uid + "/userinfo");
+    setUserInfo(user);
+    set(userReff, user);
+  }
+
   const value = {
     currentUser,
     login,
@@ -229,6 +258,9 @@ export function AuthProvider({ children }) {
     deleteApplication,
     addEvent,
     deleteEvent,
+    updateUser,
+    userInfo,
+    profilePic,
   };
 
   return (

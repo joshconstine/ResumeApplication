@@ -1,7 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Box, Button } from "@mui/material";
-import { useHistory } from "react-router-dom";
 /**
  * COMPONENT
  */
