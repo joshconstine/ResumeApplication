@@ -21,8 +21,8 @@ const Navbar = () => {
   const { currentUser, logout } = useAuth();
   async function handleClick(e) {
     try {
-      await logout();
       history.push("/");
+      await logout();
     } catch (error) {
       window.alert(error);
     }
@@ -64,14 +64,14 @@ const Navbar = () => {
             <Typography onClick={() => history.push("/")}>
               <Tooltip title="Home">
                 <IconButton>
-                  <HomeIcon sx={{ fontSize: 40, color: "red" }} />
+                  <HomeIcon sx={{ fontSize: 40, color: "#B363E6" }} />
                 </IconButton>
               </Tooltip>
             </Typography>
             <Typography onClick={() => history.push("./profile")}>
               <Tooltip title="Profile">
                 <IconButton>
-                  <AccountBoxIcon sx={{ fontSize: 40, color: "red" }} />
+                  <AccountBoxIcon sx={{ fontSize: 40, color: "#B363E6" }} />
                 </IconButton>
               </Tooltip>
             </Typography>
@@ -79,7 +79,7 @@ const Navbar = () => {
             <Typography onClick={logout}>
               <Tooltip title="Logout">
                 <IconButton>
-                  <LogoutIcon sx={{ fontSize: 40, color: "red" }} />
+                  <LogoutIcon sx={{ fontSize: 40, color: "#B363E6" }} />
                 </IconButton>
               </Tooltip>
             </Typography>

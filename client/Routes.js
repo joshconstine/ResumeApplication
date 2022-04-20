@@ -39,8 +39,9 @@ const Routes = () => {
           <Route path="/addEvent/:id" component={AddEvent} />
           <Route path="/application/:id" component={SingleApplication} />
           <Route path="/edit/application/:id" component={EditApplication} />
+          <Route path="/" component={Home} />
 
-          <Redirect to="/home" />
+          <Redirect to="/" />
         </Switch>
       ) : (
         <Switch>

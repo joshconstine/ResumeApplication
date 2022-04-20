@@ -28,7 +28,7 @@ const Footer = () => {
         justifyContent: "space-around",
         marginLeft: 0,
         marginRight: 0,
-        backgroundColor: "#d98f8f",
+        backgroundColor: "#d3bbd2",
       }}
     >
       <Box

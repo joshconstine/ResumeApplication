@@ -87,7 +87,6 @@ form div {
   padding-bottom: 30px;
 }
 .actions {
-  background-color: #d98f8f;
   height: 30px;
   width: 150px;
   justify-content: center;
@@ -125,4 +124,19 @@ form div {
   font-size: 15px;
 }
 .photo {
+}
+.color1 {
+  color: #d3bbd2;
+}
+.color2 {
+  color: #b363e6;
+}
+.color3 {
+  color: #885986;
+}
+.color4 {
+  color: #634062;
+}
+.color5 {
+  color: #ee9480;
 }

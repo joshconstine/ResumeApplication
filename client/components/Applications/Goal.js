@@ -21,15 +21,14 @@ const Goal = () => {
   let hasGoal = true;
   if (goal === null) hasGoal = false;
   return (
-    <Box>
-      <Typography variant="h6" className="regFont">
-        Job search Goal
-      </Typography>
+    <Box sx={{ alignSelf: "flex-start" }}>
       {!hasGoal ? (
         <>
+          <Typography variant="h6" className="regFont">
+            What Is Your Job Search Goal?
+          </Typography>
           <Box className=" regFont column">
-            you currently dont have any goals set add a goal below and we will
-            help you acomplish it
+            # Of Applications You Want To Submit:
           </Box>
           <Box className="column">
             <Box>
@@ -38,19 +37,26 @@ const Goal = () => {
                 <Input aria-describedby="my-helper-text" inputRef={fourm.ref} />
               </FormControl>
             </Box>
-
-            <Button onClick={(e) => handleSubmit(e)}>submit</Button>
+            <Button
+              size="large"
+              variant="contained"
+              sx={{ backgroundColor: "#B363E6" }}
+              onClick={(e) => handleSubmit(e)}
+            >
+              submit
+            </Button>
           </Box>
         </>
       ) : (
         <Box>
-          <Box className=" regFont column">
-            current goal {goal} applications per day
-          </Box>
+          <Typography variant="h6" className="regFont">
+            Your Current Goal Is:
+          </Typography>
+
           <Box className="column">
             <Box>
               <FormControl>
-                <InputLabel htmlFor="Name">update goal</InputLabel>
+                <InputLabel htmlFor="Name"> # applications per day</InputLabel>
                 <Input
                   aria-describedby="my-helper-text"
                   inputRef={fourm.ref}
@@ -59,7 +65,14 @@ const Goal = () => {
               </FormControl>
             </Box>
 
-            <Button onClick={(e) => handleSubmit(e)}>submit</Button>
+            <Button
+              size="large"
+              variant="contained"
+              sx={{ backgroundColor: "#B363E6", marginTop: 3 }}
+              onClick={(e) => handleSubmit(e)}
+            >
+              save canges
+            </Button>
           </Box>
         </Box>
       )}
