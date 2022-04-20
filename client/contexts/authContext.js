@@ -166,11 +166,21 @@ export function AuthProvider({ children }) {
     });
     console.log("set new application in database");
   }
+  async function addEvent(event, id) {
+    const uuid = uid();
+    set(
+      ref(
+        database,
+        "users/" + currentUser.uid + "/applications/" + id + "/events/" + uuid
+      ),
+      event
+    );
+    console.log("set new application in database");
+  }
   async function updateSelectedApplication(uid) {
     usersApplications.map((application) => {
       if (application.uid === uid) {
         setselectedApplication(application);
-        console.log("updated seledted application", selectedApplication);
       }
     });
   }
@@ -192,6 +202,15 @@ export function AuthProvider({ children }) {
 
     remove(applicationRef);
   }
+  async function deleteEvent(appId, id) {
+    var eventRef = ref(
+      database,
+      "users/" + currentUser.uid + "/applications/" + appId + "/events/" + id
+    );
+    console.log(eventRef);
+
+    remove(eventRef);
+  }
 
   const value = {
     currentUser,
@@ -208,6 +227,8 @@ export function AuthProvider({ children }) {
     updateSingleApplication,
     read,
     deleteApplication,
+    addEvent,
+    deleteEvent,
   };
 
   return (
