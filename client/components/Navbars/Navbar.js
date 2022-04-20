@@ -29,7 +29,7 @@ const Navbar = () => {
   }
   return (
     <AppBar
-      position="static"
+      position="fixed"
       sx={{
         backgroundColor: "white",
         border: "none",
@@ -42,7 +42,6 @@ const Navbar = () => {
         sx={{
           mr: 2,
           display: "flex",
-          flexDirection: { xs: "column", sm: "column", md: "row" },
           justifyContent: "space-between",
           alignItems: { xs: "center", sm: "center", md: "flex-end" },
         }}
@@ -58,20 +57,25 @@ const Navbar = () => {
               width: 300,
               justifyContent: "space-between",
               paddingBottom: 2,
+              paddingTop: 2,
               paddingLeft: 2,
             }}
           >
             <Typography onClick={() => history.push("/")}>
               <Tooltip title="Home">
                 <IconButton>
-                  <HomeIcon sx={{ fontSize: 40, color: "#B363E6" }} />
+                  <Typography sx={{ fontSize: 18, color: "#B363E6" }}>
+                    HOME
+                  </Typography>
                 </IconButton>
               </Tooltip>
             </Typography>
             <Typography onClick={() => history.push("./profile")}>
               <Tooltip title="Profile">
                 <IconButton>
-                  <AccountBoxIcon sx={{ fontSize: 40, color: "#B363E6" }} />
+                  <Typography sx={{ fontSize: 18, color: "#B363E6" }}>
+                    PROFILE
+                  </Typography>
                 </IconButton>
               </Tooltip>
             </Typography>
@@ -79,7 +83,9 @@ const Navbar = () => {
             <Typography onClick={logout}>
               <Tooltip title="Logout">
                 <IconButton>
-                  <LogoutIcon sx={{ fontSize: 40, color: "#B363E6" }} />
+                  <Typography sx={{ fontSize: 18, color: "#B363E6" }}>
+                    LOGOUT
+                  </Typography>
                 </IconButton>
               </Tooltip>
             </Typography>

@@ -119,6 +119,7 @@ form div {
 }
 .circle {
   border-radius: 50%;
+  max-width: 200px;
 }
 .regFont {
   font-size: 15px;

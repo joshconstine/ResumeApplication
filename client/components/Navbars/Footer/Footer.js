@@ -22,35 +22,38 @@ const Footer = () => {
       sx={{
         top: "auto",
         bottom: 0,
-        height: 100,
+        height: 130,
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-around",
-        marginLeft: 0,
-        marginRight: 0,
+        justifyContent: "space-between",
         backgroundColor: "#d3bbd2",
+        paddingTop: 3,
+        paddingLeft: { xs: 5, sm: 5, md: 5, lg: 20 },
+        paddingRight: { xs: 5, sm: 5, md: 5, lg: 20 },
       }}
     >
       <Box
         sx={{
           display: "flex",
+          flexDirection: "column",
+
           flexWrap: "wrap",
-          width: 125,
-          padding: 1,
+          width: 150,
         }}
       >
         <Typography
           variant="p"
+          className="color4"
           sx={{
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: 600,
             fontStyle: "italic",
-            marginBottom: 0.5,
+            marginBottom: 1,
           }}
         >
           Application Helper
         </Typography>
-        <Typography variant="p" sx={{ fontSize: 11 }}>
+        <Typography variant="p" className="color4" sx={{ fontSize: 13 }}>
           'You miss 100% of the shots you dont take'
         </Typography>
       </Box>
@@ -59,28 +62,29 @@ const Footer = () => {
           display: "flex",
           flexDirection: "column",
           // alignItems: "left",
-
-          padding: 1,
+          width: 150,
         }}
       >
         <Typography
           variant="p"
+          className="color4"
           sx={{
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: 600,
             fontStyle: "italic",
-            marginBottom: 0.5,
+            marginBottom: 1,
           }}
         >
           Explore
         </Typography>
         <Link to="/about">
-          <Typography variant="p" sx={{ fontSize: 11 }}>
+          <Typography variant="p" className="color4" sx={{ fontSize: 13 }}>
             About
           </Typography>
         </Link>
+
         <Link to="/creator">
-          <Typography variant="p" sx={{ fontSize: 11 }}>
+          <Typography variant="p" className="color4" sx={{ fontSize: 13 }}>
             Meet the Creator
           </Typography>
         </Link>
@@ -88,37 +92,32 @@ const Footer = () => {
 
       <Box
         sx={{
-          padding: 1,
-
           display: "flex",
           flexDirection: "column",
-          // alignItems: "right",
-          padding: 1,
+          // alignItems: "right"
+          width: 150,
         }}
       >
         <Typography
           variant="p"
+          className="color4"
           sx={{
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: 600,
             fontStyle: "italic",
-            marginBottom: 0.5,
+            marginBottom: 1,
           }}
         >
           More
         </Typography>
-        <Typography variant="p" noWrap component="div" sx={{ fontSize: 12 }}>
-          Questions? Contact Us
-        </Typography>
-
         <Typography
           variant="p"
+          className="color4"
           noWrap
           component="div"
-          sx={{ fontSize: 12 }}
-          onClick={() => history.push("/login")}
+          sx={{ fontSize: 13 }}
         >
-          Already a user? sign in
+          Questions? Contact Us
         </Typography>
       </Box>
     </AppBar>

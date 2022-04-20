@@ -27,23 +27,21 @@ const Goal = () => {
           <Typography variant="h6" className="regFont">
             What Is Your Job Search Goal?
           </Typography>
-          <Box className=" regFont column">
-            # Of Applications You Want To Submit:
-          </Box>
+
           <Box className="column">
             <Box>
               <FormControl>
-                <InputLabel htmlFor="Name">{fourm.text}</InputLabel>
+                <InputLabel htmlFor="Name"> # applications per day:</InputLabel>
                 <Input aria-describedby="my-helper-text" inputRef={fourm.ref} />
               </FormControl>
             </Box>
             <Button
               size="large"
               variant="contained"
-              sx={{ backgroundColor: "#B363E6" }}
+              sx={{ backgroundColor: "#B363E6", marginTop: 3 }}
               onClick={(e) => handleSubmit(e)}
             >
-              submit
+              save changes
             </Button>
           </Box>
         </>
