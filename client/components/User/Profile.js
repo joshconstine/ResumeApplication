@@ -22,10 +22,11 @@ const Profile = () => {
   const [phoneNumber, setphoneNumber] = useState("");
 
   useEffect(() => {
-    setFirstName(userInfo.firstName);
-    setLastName(userInfo.lastName);
-    setEmail(userInfo.email);
-    setphoneNumber(userInfo.phoneNumber);
+    setFirstName(userInfo?.firstName || "");
+    setLastName(userInfo?.lastName || "");
+    setEmail(userInfo?.email || "");
+    setphoneNumber(userInfo?.phoneNumber || "");
+    // fetchPhoto();
   }, [userInfo]);
   const history = useHistory();
 
@@ -66,8 +67,10 @@ const Profile = () => {
     const dt = e.dataTransfer;
     const files = dt.files;
     const fileArray = [...files];
+    console.log(fileArray[0]);
     addPhoto(fileArray[0]);
   };
+
   const fetchPhoto = (e) => {
     const img = document.getElementById("droparea");
 
@@ -82,7 +85,7 @@ const Profile = () => {
         marginTop: 5,
       }}
     >
-      <Box sx={{ borderRadius: "25%" }} className="column">
+      <Box sx={{ borderRadius: "25%" }} className="column photo">
         <img
           id="droparea"
           className="circle"

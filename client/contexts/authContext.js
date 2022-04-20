@@ -10,6 +10,7 @@ import {
 import { uid } from "uid";
 import { ref, set, onValue, remove } from "firebase/database";
 import { ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import Compressor from "compressorjs";
 
 const AuthContext = React.createContext();
 
@@ -94,11 +95,34 @@ export function AuthProvider({ children }) {
     set(userReff, user);
   }
   function addPhoto(img) {
+    console.log("in add photo");
     const uuid = uid();
     const imgref = sRef(
       storage,
       "users/" + currentUser.uid + "/photos/" + "profilepic"
     );
+
+    new Compressor(img, {
+      quality: 0.6,
+
+      // The compression process is asynchronous,
+      // which means you have to access the `result` in the `success` hook function.
+      success(result) {
+        const formData = new FormData();
+
+        // The third parameter is required for server
+        formData.append("file", result, result.name);
+
+        // Send the compressed image file to server with XMLHttpRequest.
+        console.log(img);
+        // axios.post("/path/to/upload", formData).then(() => {
+        //   console.log("Upload success");
+        // });
+      },
+      error(err) {
+        console.log(err.message);
+      },
+    });
     uploadBytes(imgref, img).then((snapshot) => {
       console.log("Uploaded a blob or file!", img);
     });
@@ -151,7 +175,6 @@ export function AuthProvider({ children }) {
       let userInfoRef = ref(database, "users/" + str + "/userinfo");
       onValue(userInfoRef, (snapshot) => {
         const data = snapshot.val();
-
         setUserInfo(data);
       });
 
@@ -220,13 +243,7 @@ export function AuthProvider({ children }) {
 
     remove(eventRef);
   }
-  function addPhoto(img) {
-    const imgref = ref(storage, "joshimg.jpg");
-    uploadBytes(imgref, img).then((snapshot) => {
-      console.log("Uploaded a blob or file!", img);
-    });
-    return {};
-  }
+
   function updateUser(user) {
     var userReff = ref(database, "users/" + currentUser.uid + "/userinfo");
     setUserInfo(user);
