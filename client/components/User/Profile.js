@@ -154,9 +154,11 @@ const Profile = () => {
           size="large"
           variant="contained"
           sx={{ backgroundColor: "#B363E6" }}
+          className="styleButton"
           onClick={() => {
             handleUpdate();
           }}
+          disableElevation
         >
           Save changes
         </Button>
