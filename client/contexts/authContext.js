@@ -41,7 +41,6 @@ export function AuthProvider({ children }) {
   const [usersApplications, setUsersApplications] = useState([]);
   const [selectedApplication, setselectedApplication] = useState({});
   const [userInfo, setUserInfo] = useState({});
-  const [profilePic, setProfilePic] = useState({});
 
   const history = useHistory();
 
@@ -139,7 +138,6 @@ export function AuthProvider({ children }) {
     getDownloadURL(sRef(storage, imgref))
       .then((url) => {
         // `url` is the download URL for 'images/stars.jpg'
-        setProfilePic(url);
         // Or inserted into an <img> element
         img.setAttribute("src", url);
       })
@@ -168,8 +166,6 @@ export function AuthProvider({ children }) {
         const data = snapshot.val();
         setUserInfo(data);
       });
-
-      console.log("applications after map", usersApplications);
     }
   }
   async function cleardata() {
@@ -260,7 +256,6 @@ export function AuthProvider({ children }) {
     deleteEvent,
     updateUser,
     userInfo,
-    profilePic,
   };
 
   return (

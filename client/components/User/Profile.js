@@ -3,8 +3,6 @@ import { useHistory, Link } from "react-router-dom";
 import { TextField, Typography, Box, Button } from "@mui/material";
 import Goal from "../Applications/Goal";
 import { useAuth } from "../../contexts/authContext";
-import { ref, set, getStorage, uploadBytes } from "firebase/storage";
-import { ControlPointSharp } from "@mui/icons-material";
 
 const Profile = () => {
   const {
@@ -14,9 +12,7 @@ const Profile = () => {
     getPhoto,
     updateUser,
     userInfo,
-    profilePic,
   } = useAuth();
-  const user = userInfo;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
