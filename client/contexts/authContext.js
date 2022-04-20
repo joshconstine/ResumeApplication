@@ -41,6 +41,7 @@ export function AuthProvider({ children }) {
   const [usersApplications, setUsersApplications] = useState([]);
   const [selectedApplication, setselectedApplication] = useState({});
   const [userInfo, setUserInfo] = useState({});
+  const [profilePic, setProfilePic] = useState({});
 
   const history = useHistory();
 
@@ -135,20 +136,10 @@ export function AuthProvider({ children }) {
       storage,
       "users/" + currentUser.uid + "/photos/" + "profilepic"
     );
-    console.log("in getphoto");
     getDownloadURL(sRef(storage, imgref))
       .then((url) => {
         // `url` is the download URL for 'images/stars.jpg'
-
-        // This can be downloaded directly:
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "blob";
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-        };
-        xhr.open("GET", url);
-        xhr.send();
-
+        setProfilePic(url);
         // Or inserted into an <img> element
         img.setAttribute("src", url);
       })
@@ -269,6 +260,7 @@ export function AuthProvider({ children }) {
     deleteEvent,
     updateUser,
     userInfo,
+    profilePic,
   };
 
   return (

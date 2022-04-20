@@ -14,6 +14,7 @@ const Profile = () => {
     getPhoto,
     updateUser,
     userInfo,
+    profilePic,
   } = useAuth();
   const user = userInfo;
   const [firstName, setFirstName] = useState("");
@@ -26,7 +27,7 @@ const Profile = () => {
     setLastName(userInfo?.lastName || "");
     setEmail(userInfo?.email || "");
     setphoneNumber(userInfo?.phoneNumber || "");
-    // fetchPhoto();
+    fetchPhoto();
   }, [userInfo]);
   const history = useHistory();
 
@@ -73,7 +74,6 @@ const Profile = () => {
 
   const fetchPhoto = (e) => {
     const img = document.getElementById("droparea");
-
     getPhoto(img);
   };
   return (
