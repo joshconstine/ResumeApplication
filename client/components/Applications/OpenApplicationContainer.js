@@ -11,8 +11,6 @@ import { useAuth } from "../../contexts/authContext";
 export const OpenApplicationsContainer = (props) => {
   const { usersApplications } = useAuth();
 
-  console.log("renderd applications", usersApplications);
-
   return (
     <Box className="">
       {usersApplications.map((application, i) => {
