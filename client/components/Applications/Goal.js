@@ -7,18 +7,17 @@ import {
   Input,
   Typography,
 } from "@mui/material";
-import { fetchCreateGoal } from "../../store/auth";
 import { connect, useSelector, useDispatch } from "react-redux";
 
 const Goal = () => {
   let goalRef = useRef("");
-  const goal = useSelector((state) => state.auth.goal);
+  const goal = "";
   const dispatch = useDispatch();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await dispatch(fetchCreateGoal(goalRef.current.value));
+    // await dispatch(fetchCreateGoal(goalRef.current.value));
   }
   const fourm = { text: "Goal", ref: goalRef };
   let hasGoal = true;

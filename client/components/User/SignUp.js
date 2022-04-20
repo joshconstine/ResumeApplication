@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch, connect } from "react-redux";
 import { Form } from "react-bootstrap";
 
 import { LockOutlined } from "@mui/icons-material";

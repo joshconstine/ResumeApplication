@@ -8,11 +8,9 @@ import {
   signOut,
 } from "firebase/auth";
 import { uid } from "uid";
-import { ref, set, onValue, remove, get } from "firebase/database";
+import { ref, set, onValue, remove } from "firebase/database";
 import { ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
-import { setApplications } from "../store/application";
 
-//
 const AuthContext = React.createContext();
 
 export function useAuth() {
@@ -54,6 +52,7 @@ export function AuthProvider({ children }) {
   }, []);
   useEffect(() => {
     read();
+    // addlistner();
   }, [currentUser]);
 
   async function signup(email, password) {
@@ -133,16 +132,14 @@ export function AuthProvider({ children }) {
       });
   }
   async function read() {
-    console.log("in read", currentUser);
     if (currentUser) {
       const str = currentUser.uid || "";
-      console.log(str);
       let userApplicationsReff = ref(
         database,
         "users/" + str + "/applications"
       );
       onValue(userApplicationsReff, async (snapshot) => {
-        setApplications([]);
+        await cleardata();
         const data = await snapshot.val();
         if (data !== null) {
           Object.values(data).map((application) => {
@@ -153,26 +150,8 @@ export function AuthProvider({ children }) {
       console.log("applications after map", usersApplications);
     }
   }
-  async function addlistner() {
-    console.log("in read", currentUser);
-    if (currentUser) {
-      const str = currentUser.uid || "";
-      console.log(str);
-      let userApplicationsReff = ref(
-        database,
-        "users/" + str + "/applications"
-      );
-      onValue(userApplicationsReff, (snapshot) => {
-        setApplications([]);
-        const data = snapshot.val();
-        if (data !== null) {
-          Object.values(data).map((application) => {
-            setUsersApplications((oldArray) => [...oldArray, application]);
-          });
-        }
-        console.log(usersApplications);
-      });
-    }
+  async function cleardata() {
+    await setUsersApplications([]);
   }
 
   async function writeApplicationData(application) {
@@ -187,11 +166,21 @@ export function AuthProvider({ children }) {
     });
     console.log("set new application in database");
   }
+  async function addEvent(event, id) {
+    const uuid = uid();
+    set(
+      ref(
+        database,
+        "users/" + currentUser.uid + "/applications/" + id + "/events/" + uuid
+      ),
+      event
+    );
+    console.log("set new application in database");
+  }
   async function updateSelectedApplication(uid) {
     usersApplications.map((application) => {
       if (application.uid === uid) {
         setselectedApplication(application);
-        console.log("updated seledted application", selectedApplication);
       }
     });
   }
@@ -213,6 +202,15 @@ export function AuthProvider({ children }) {
 
     remove(applicationRef);
   }
+  async function deleteEvent(appId, id) {
+    var eventRef = ref(
+      database,
+      "users/" + currentUser.uid + "/applications/" + appId + "/events/" + id
+    );
+    console.log(eventRef);
+
+    remove(eventRef);
+  }
 
   const value = {
     currentUser,
@@ -229,6 +227,8 @@ export function AuthProvider({ children }) {
     updateSingleApplication,
     read,
     deleteApplication,
+    addEvent,
+    deleteEvent,
   };
 
   return (

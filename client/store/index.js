@@ -3,14 +3,10 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
-import applicationsReducer from "./application";
-import applicationReducer from "./singleApplication";
 import eventsReducer from "./event";
 
 const reducer = combineReducers({
   auth,
-  applications: applicationsReducer,
-  selectedApplication: applicationReducer,
   events: eventsReducer,
 });
 const middleware = composeWithDevTools(

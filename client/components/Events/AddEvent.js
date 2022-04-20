@@ -1,16 +1,15 @@
 import React, { useRef } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { fetchCreateEvent } from "../../store/event";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
 
 const addEvent = (props) => {
   let eventNameRef = useRef("");
   let eventDateRef = useRef();
   let eventTimeRef = useRef();
   let notesRef = useRef();
-  const dispatch = useDispatch();
   const history = useHistory();
+  const { addEvent } = useAuth();
 
   const id = props.match.params.id;
 
@@ -21,7 +20,7 @@ const addEvent = (props) => {
       eventDate: new Date().toISOString(),
       notes: notesRef.current.value,
     };
-    await dispatch(fetchCreateEvent(event, id));
+    addEvent(event, id);
     history.push(`/application/${props.match.params.id}`);
   }
   const fourms = [

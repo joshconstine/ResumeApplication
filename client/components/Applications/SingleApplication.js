@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchApplication } from "../../store/singleApplication.js";
 import { useHistory } from "react-router-dom";
-import { fetchDeleteEvent } from "../../store/event";
 import { useAuth } from "../../contexts/authContext";
 
 const SingleApplication = (props) => {
   const history = useHistory();
-  const { updateSelectedApplication, selectedApplication } = useAuth();
+  const { updateSelectedApplication, selectedApplication, deleteEvent } =
+    useAuth();
 
   const applicationId = props.match.params.id;
   console.log(updateSelectedApplication(applicationId));
@@ -19,15 +18,28 @@ const SingleApplication = (props) => {
     history.push(`/addEvent/${applicationId}`);
   }
   async function handleDelete(e, id) {
-    console.log("delete", id);
-    await dispatch(fetchDeleteEvent(id));
-    await dispatch(fetchApplication(applicationId));
+    deleteEvent(applicationId, id);
   }
   function editClick() {
-    console.log("edit");
     history.push(`/edit/application/${applicationId}`);
   }
 
+  function renderEvents() {
+    for (var event in selectedApplication.events) {
+      var value = selectedApplication.events[event];
+      console.log(value);
+      return printEvent(value, event);
+    }
+  }
+  function printEvent(event, value) {
+    return (
+      <Box>
+        <Box>{event.eventName}</Box>
+        <Box>{event.eventDate}</Box>
+        <Button onClick={(e) => handleDelete(e, value)}> delete</Button>
+      </Box>
+    );
+  }
   return (
     <Box className="twothirdContainer theme">
       <Box>
@@ -36,21 +48,8 @@ const SingleApplication = (props) => {
         {selectedApplication.positionName}
         {selectedApplication.positionDescription}
       </Box>
+      {renderEvents()}
 
-      {selectedApplication.Events?.map((event, i) => {
-        return (
-          <Box key={i}>
-            <Box>
-              {event.eventName}
-              {event.eventDate}
-            </Box>
-            <Button onClick={(e) => handleDelete(e, event.id)}>
-              {" "}
-              Delete event
-            </Button>
-          </Box>
-        );
-      })}
       <Button onClick={handleSubmit}>add event</Button>
       <Button onClick={editClick}>edit</Button>
     </Box>
