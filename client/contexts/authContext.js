@@ -129,6 +129,20 @@ export function AuthProvider({ children }) {
 
     return {};
   }
+  function AddDocument(document, name) {
+    console.log("in add document");
+    const uuid = uid();
+    const docRef = sRef(
+      storage,
+      "users/" + currentUser.uid + "/documents/" + uuid
+    );
+
+    uploadBytes(docRef, document).then((snapshot) => {
+      console.log("Uploaded a blob or file!", name);
+    });
+
+    return { uuid };
+  }
 
   function getPhoto(img) {
     const imgref = sRef(
@@ -256,6 +270,7 @@ export function AuthProvider({ children }) {
     deleteEvent,
     updateUser,
     userInfo,
+    AddDocument,
   };
 
   return (

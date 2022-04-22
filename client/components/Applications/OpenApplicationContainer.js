@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { Box, Button, Typography } from "@mui/material";
-import OpenApplicationRow from "./OpenApplicationRow";
+import OpenApplicationCard from "./OpenApplicationCard";
 import { useHistory, Link } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 
@@ -15,10 +15,9 @@ export const OpenApplicationsContainer = (props) => {
     <Box className="">
       {usersApplications.map((application, i) => {
         return (
-          <OpenApplicationRow
+          <OpenApplicationCard
             key={i}
-            companyName={application.companyName}
-            jobTitle={application.positionName}
+            application={application}
             id={application.uid}
           />
         );

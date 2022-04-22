@@ -115,7 +115,8 @@ form div {
 }
 
 .green-border {
-  border-color: green;
+  border-color: #b363e6;
+  box-shadow: 5px 5px 5px 5px #885986;
 }
 .circle {
   border-radius: 50%;

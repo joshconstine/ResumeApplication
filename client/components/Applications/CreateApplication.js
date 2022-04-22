@@ -1,5 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { Box, Button, FormControl, InputLabel, Input } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  Input,
+  TextField,
+} from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
 
@@ -9,7 +16,7 @@ const CreateApplication = () => {
   let positionDescriptionRef = useRef();
   let websiteURLRef = useRef();
   const history = useHistory();
-  const { writeApplicationData } = useAuth();
+  const { writeApplicationData, AddDocument } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +33,7 @@ const CreateApplication = () => {
   const fourms = [
     { text: "Company Name", ref: companyNameRef },
     { text: "Position Name", ref: positionNameRef },
-    { text: "Position Description", ref: positionDescriptionRef },
+
     { text: "Website Url:", ref: websiteURLRef },
   ];
   useEffect(() => {
@@ -57,31 +64,65 @@ const CreateApplication = () => {
     const dt = e.dataTransfer;
     const files = dt.files;
     const fileArray = [...files];
+    const returnedUid = AddDocument(fileArray[0], "resume");
     console.log(files); // FileList
     console.log(fileArray);
+    console.log("returned uid ", returnedUid);
   };
 
   return (
-    <Box className="twothirdContainer theme">
+    <Box className="">
       <h1>create application</h1>
       <Box className="column">
-        {fourms.map((fourm, i) => {
-          return (
-            <Box key={i}>
-              <FormControl>
+        <Box className="column" sx={{ flexDirection: "row" }}>
+          {fourms.map((fourm, i) => {
+            return (
+              <Box key={i} sx={{ margin: 3 }}>
+                {/* <FormControl>
                 <InputLabel htmlFor="Name">{fourm.text}</InputLabel>
                 <Input aria-describedby="my-helper-text" inputRef={fourm.ref} />
-              </FormControl>
-            </Box>
-          );
-        })}
+              </FormControl> */}
+                <TextField
+                  sx={{ paddingBottom: "2rem" }}
+                  label={fourm.text}
+                  type="text"
+                  className="regFont"
+                  inputRef={fourm.ref}
+                  color="secondary"
+                  focused
+                />
+              </Box>
+            );
+          })}
+        </Box>
+        <TextField
+          sx={{ paddingBottom: "2rem" }}
+          label="Position Description"
+          type="text"
+          className="regFont"
+          inputRef={positionDescriptionRef}
+          color="secondary"
+          rows={10}
+          fullWidth
+          focused
+          multiline
+        />
         <Box>
           <Box className="droparea" id="droparea">
-            <i className="far fa-images"></i>
-            <p>Add Resume/Cover letter here</p>
+            <p className="regFont">Add Resume/Cover letter here</p>
           </Box>
         </Box>
-        <Button onClick={(e) => handleSubmit(e)}>submit</Button>
+
+        <Button
+          size="large"
+          variant="contained"
+          sx={{ backgroundColor: "#B363E6" }}
+          className="styleButton"
+          onClick={(e) => handleSubmit(e)}
+          disableElevation
+        >
+          Save Application
+        </Button>
       </Box>
     </Box>
   );
