@@ -7,6 +7,7 @@ import {
   Input,
   TextField,
   MenuItem,
+  NativeSelect,
 } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
@@ -33,7 +34,6 @@ const CreateApplication = () => {
       resumeUid: resumeUid,
       coverLetterUid: coverLetterUid,
     };
-    console.log(application);
     await writeApplicationData(application);
     history.push("/applications");
   }
@@ -67,22 +67,15 @@ const CreateApplication = () => {
 
   const prevents = (e) => e.preventDefault();
 
-  // const handleChange = (e) => {
-  //   e.preventDefault();
-  //   console.log("in handle change", documentType);
-  //   console.log(setDocumentType(e.target.value));
-  //   console.log(" after change", documentType);
-  // };
 
   const handleDrop = (e) => {
     const dt = e.dataTransfer;
     const files = dt.files;
     const fileArray = [...files];
 
-    // var e = document.getElementById("documentSelcector");
-    // var documentType = e.value;
-    var documentType = $("#documentSelcector").val(); // The value of the selected option
-    console.log(documentType);
+    var e = document.getElementById("documentSelcector");
+    var documentType = e.value;
+
     if (documentType === "resume") {
       setResumeUid(AddDocument(fileArray[0]).uuid);
     } else {
@@ -129,16 +122,15 @@ const CreateApplication = () => {
         />
         <FormControl sx={{ width: 200 }}>
           <InputLabel id="demo-simple-select-label">Document</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
+          <NativeSelect
             id="documentSelcector"
             label="document"
             // onChange={(e) => handleChange(e)}
             defaultValue="resume"
           >
-            <MenuItem value={"resume"}>Resume</MenuItem>
-            <MenuItem value={"cv"}>Cover Letter</MenuItem>
-          </Select>
+            <option value={"resume"}>Resume</option>
+            <option value={"cv"}>Cover Letter</option>
+          </NativeSelect>
         </FormControl>
         <Box>
           <Box className="droparea" id="droparea">
