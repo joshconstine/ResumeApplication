@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ const CreateApplication = () => {
   let websiteURLRef = useRef();
   const history = useHistory();
   const { writeApplicationData, AddDocument } = useAuth();
+  const [resumeUid, setResumeUid] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +27,9 @@ const CreateApplication = () => {
       positionDescription: positionDescriptionRef.current.value,
       appliedAt: new Date().toISOString(),
       websiteURL: websiteURLRef.current.value,
+      resumeUid: resumeUid,
     };
+    console.log(application);
     await writeApplicationData(application);
     history.push("/applications");
   }
@@ -64,10 +67,10 @@ const CreateApplication = () => {
     const dt = e.dataTransfer;
     const files = dt.files;
     const fileArray = [...files];
-    const returnedUid = AddDocument(fileArray[0], "resume");
+    setResumeUid(AddDocument(fileArray[0], "resume"));
     console.log(files); // FileList
     console.log(fileArray);
-    console.log("returned uid ", returnedUid);
+    console.log("returned uid ", resumeUid);
   };
 
   return (
