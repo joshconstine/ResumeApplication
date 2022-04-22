@@ -67,7 +67,7 @@ const CreateApplication = () => {
     const dt = e.dataTransfer;
     const files = dt.files;
     const fileArray = [...files];
-    setResumeUid(AddDocument(fileArray[0], "resume"));
+    setResumeUid(AddDocument(fileArray[0], "resume").uuid);
     console.log(files); // FileList
     console.log(fileArray);
     console.log("returned uid ", resumeUid);

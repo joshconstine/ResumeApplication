@@ -195,6 +195,7 @@ export function AuthProvider({ children }) {
       positionDescription: application.positionDescription,
       appliedAt: application.appliedAt,
       websiteUrl: application.websiteURL,
+      resumeUid: application.resumeUid,
       uid: uuid,
     });
     console.log("set new application in database");

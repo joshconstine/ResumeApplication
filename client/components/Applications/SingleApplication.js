@@ -28,6 +28,7 @@ const SingleApplication = (props) => {
       return printEvent(value, event);
     }
   }
+  console.log(selectedApplication);
   function printEvent(event, value) {
     return (
       <Box>
@@ -44,6 +45,7 @@ const SingleApplication = (props) => {
         {selectedApplication.companyName}
         {selectedApplication.positionName}
         {selectedApplication.positionDescription}
+        {/* {selectedApplication.resumeUid} */}
       </Box>
       {renderEvents()}
 
