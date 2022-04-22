@@ -26,11 +26,11 @@ form div {
   width: 35%;
   height: 200px;
   background-color: white;
-  margin: 15px;
   display: flex;
-  justify-content: center;
+  padding: 2;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 .twothirdContainer {
   width: 90%;
@@ -87,7 +87,6 @@ form div {
   padding-bottom: 30px;
 }
 .actions {
-  background-color: #d98f8f;
   height: 30px;
   width: 150px;
   justify-content: center;
@@ -120,9 +119,25 @@ form div {
 }
 .circle {
   border-radius: 50%;
+  max-width: 200px;
 }
 .regFont {
   font-size: 15px;
 }
 .photo {
+}
+.color1 {
+  color: #d3bbd2;
+}
+.color2 {
+  color: #b363e6;
+}
+.color3 {
+  color: #885986;
+}
+.color4 {
+  color: #634062;
+}
+.color5 {
+  color: #ee9480;
 }

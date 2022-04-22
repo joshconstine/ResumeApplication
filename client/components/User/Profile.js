@@ -77,18 +77,21 @@ const Profile = () => {
       sx={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         marginTop: 5,
       }}
     >
-      <Box sx={{ borderRadius: "25%" }} className="column photo">
+      <Box
+        sx={{ borderRadius: "25%", alignSelf: "flex-start" }}
+        className="column photo"
+      >
         <img
           id="droparea"
           className="circle"
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
         />
-        <p>drag over to add a photo</p>
-        <Button
+        <p>Drag and drop profile picture</p>
+        {/* <Button
           size="large"
           variant="contained"
           onClick={() => {
@@ -96,18 +99,9 @@ const Profile = () => {
           }}
         >
           write data
-        </Button>
-        <Button
-          size="large"
-          variant="contained"
-          onClick={() => {
-            fetchPhoto();
-          }}
-        >
-          getPhoto
-        </Button>
+        </Button> */}
       </Box>
-      <Box className="column">
+      <Box className="column" sx={{ marginLeft: 10, marginRight: 10 }}>
         <TextField
           sx={{ paddingBottom: "2rem" }}
           label="First Name"
@@ -117,6 +111,8 @@ const Profile = () => {
           onChange={(event) => {
             setFirstName(event.target.value);
           }}
+          color="secondary"
+          focused
         />
         <TextField
           sx={{ paddingBottom: "2rem" }}
@@ -127,6 +123,8 @@ const Profile = () => {
           onChange={(event) => {
             setLastName(event.target.value);
           }}
+          color="secondary"
+          focused
         />
         <TextField
           sx={{ paddingBottom: "2rem" }}
@@ -137,6 +135,8 @@ const Profile = () => {
           onChange={(event) => {
             setEmail(event.target.value);
           }}
+          color="secondary"
+          focused
         />
         <TextField
           sx={{ paddingBottom: "2rem" }}
@@ -147,15 +147,20 @@ const Profile = () => {
           onChange={(event) => {
             setphoneNumber(event.target.value);
           }}
+          color="secondary"
+          focused
         />
         <Button
           size="large"
           variant="contained"
+          sx={{ backgroundColor: "#B363E6" }}
+          className="styleButton"
           onClick={() => {
             handleUpdate();
           }}
+          disableElevation
         >
-          update
+          Save changes
         </Button>
       </Box>
       <Goal />

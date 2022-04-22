@@ -16,6 +16,7 @@ import EventsHome from "./components/Events/EventsHome";
 import Login from "./components/User/Login";
 import SignUp from "./components/User/SignUp";
 import Profile from "./components/User/Profile";
+import { Container } from "@mui/material";
 /**
  * COMPONENT
  */
@@ -23,7 +24,7 @@ const Routes = () => {
   const { currentUser } = useAuth();
 
   return (
-    <div>
+    <Container sx={{ paddingTop: 12, paddingBottom: 40 }}>
       {currentUser ? (
         <Switch>
           <Route path="/home" component={Home} />
@@ -39,8 +40,9 @@ const Routes = () => {
           <Route path="/addEvent/:id" component={AddEvent} />
           <Route path="/application/:id" component={SingleApplication} />
           <Route path="/edit/application/:id" component={EditApplication} />
+          <Route path="/" component={Home} />
 
-          <Redirect to="/home" />
+          <Redirect to="/" />
         </Switch>
       ) : (
         <Switch>
@@ -49,7 +51,7 @@ const Routes = () => {
           <Route path="/signup" component={SignUp} />
         </Switch>
       )}
-    </div>
+    </Container>
   );
 };
 
