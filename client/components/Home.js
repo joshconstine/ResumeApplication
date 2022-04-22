@@ -17,22 +17,37 @@ export const Home = (props) => {
   return (
     <Box
       sx={{
-        marginTop: 5,
         width: "100%",
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
+        marginTop: 1,
       }}
     >
-      <Typography>hello {userInfo.firstName}</Typography>
+      <Box
+        className="column"
+        sx={{
+          alignSelf: "flex-start",
+          paddingLeft: "5%",
+          alignItems: "flex-start",
+        }}
+      >
+        <Typography variant="p" className="header">
+          Hello, {userInfo.firstName}
+        </Typography>
+        <Typography variant="p" sx={{ fontSize: 15, marginTop: 1 }}>
+          Lets help you find your dream job!
+        </Typography>
+      </Box>
+
       <Box
         sx={{
           width: "90%",
-          height: 500,
           display: "flex",
-          justifyContent: "space-evenly",
+          justifyContent: "center",
           flexWrap: "wrap",
+          marginTop: 3,
           padding: 5,
           backgroundColor: "#F5F5F5",
         }}
@@ -43,7 +58,12 @@ export const Home = (props) => {
         >
           <CardHeader
             avatar={<ArticleIcon />}
-            sx={{ backgroundColor: "#D3BBD2", width: "80%", margin: 2 }}
+            sx={{
+              backgroundColor: "#D3BBD2",
+              width: "80%",
+              margin: 2,
+              marginBottom: 0,
+            }}
             title="Applications"
           />
           <CardContent>
@@ -60,7 +80,13 @@ export const Home = (props) => {
           <CardHeader
             avatar={<DateRangeIcon />}
             title="Calendar"
-            sx={{ backgroundColor: "#D3BBD2", width: "80%", margin: 2 }}
+            sx={{
+              backgroundColor: "#D3BBD2",
+
+              width: "80%",
+              margin: 2,
+              marginBottom: 0,
+            }}
           />
           <CardContent>
             <Typography variant="p" sx={{ fontSize: 14 }}>
@@ -75,7 +101,13 @@ export const Home = (props) => {
           <CardHeader
             title="Events"
             avatar={<EventIcon />}
-            sx={{ backgroundColor: "#D3BBD2", width: "80%", margin: 2 }}
+            sx={{
+              backgroundColor: "#D3BBD2",
+
+              width: "80%",
+              margin: 2,
+              marginBottom: 0,
+            }}
           />
           <CardContent>
             <Typography variant="p" sx={{ fontSize: 14 }}>
@@ -91,7 +123,13 @@ export const Home = (props) => {
           <CardHeader
             title="Templates"
             avatar={<PostAddIcon />}
-            sx={{ backgroundColor: "#D3BBD2", width: "80%", margin: 2 }}
+            sx={{
+              backgroundColor: "#D3BBD2",
+
+              width: "80%",
+              margin: 2,
+              marginBottom: 0,
+            }}
           />
           <CardContent>
             <Typography variant="p" sx={{ fontSize: 14 }}>

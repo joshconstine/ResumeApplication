@@ -35,12 +35,14 @@ const SingleApplication = (props) => {
   const [expandedFourm, setExpandedfourm] = React.useState(false);
   const id = props.match.params.id;
   console.log(updateSelectedApplication(id));
+  const appliedAt = selectedApplication.appliedAt?.slice(0, 10);
+  console.log("applied at", appliedAt);
 
   const fourms = [
-    { text: "Company Name", ref: companyName, set: setCompanyName },
-    { text: "Position Name", ref: positionName, set: setPositionName },
+    { text: "Company", ref: companyName, set: setCompanyName },
+    { text: "Position", ref: positionName, set: setPositionName },
 
-    { text: "Website Url:", ref: websiteUrl, set: setPositionDescription },
+    { text: "Website", ref: websiteUrl, set: setPositionDescription },
   ];
 
   const handleUpdate = () => {
@@ -107,6 +109,7 @@ const SingleApplication = (props) => {
       <CardHeader
         sx={{ backgroundColor: "#D3BBD2", width: "80%", margin: 2 }}
         title={selectedApplication.companyName}
+        subheader={`Applied: ${appliedAt}`}
       />
 
       <CardContent>
@@ -131,10 +134,59 @@ const SingleApplication = (props) => {
           })}
         </Box>
         {renderEvents()}
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Box sx={{ margin: 1 }}>
+            <TextField
+              sx={{ paddingBottom: "2rem" }}
+              label="Description"
+              type="text"
+              className="regFont"
+              value={positionDescription}
+              color="secondary"
+              onChange={(event) => {
+                setPositionDescription(event.target.value);
+              }}
+              focused
+              fullWidth
+              multiline
+            />
+          </Box>
+        </Collapse>
       </CardContent>
       <CardActions>
-        <Button onClick={handleDelete}>delete</Button>
-        <Button onClick={handleSubmit}>add event</Button>
+        <Button
+          size="large"
+          variant="contained"
+          id="changesButton"
+          sx={{ backgroundColor: "#B363E6" }}
+          className="styleButton"
+          onClick={() => {
+            handleUpdate();
+          }}
+          disableElevation
+        >
+          Save changes
+        </Button>
+        {/* <Button onClick={handleDelete}>delete</Button> */}
+        <Button
+          size="large"
+          variant="contained"
+          sx={{ backgroundColor: "#B363E6" }}
+          className="styleButton"
+          onClick={handleSubmit}
+          disableElevation
+        >
+          Add Event
+        </Button>{" "}
+        <Button
+          size="large"
+          variant="contained"
+          sx={{ backgroundColor: "#B363E6" }}
+          className="styleButton"
+          disableElevation
+        >
+          View Documents
+        </Button>{" "}
         <ExpandMore
           expand={expandedFourm}
           onClick={handleExpandClick}
@@ -143,32 +195,7 @@ const SingleApplication = (props) => {
         >
           <ExpandMoreIcon />
         </ExpandMore>
-        <button
-          onClick={() => {
-            handleUpdate();
-          }}
-        >
-          Submit Changes
-        </button>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <Box sx={{ margin: 1 }}>
-          <TextField
-            sx={{ paddingBottom: "2rem" }}
-            label="Description"
-            type="text"
-            className="regFont"
-            value={positionDescription}
-            color="secondary"
-            onChange={(event) => {
-              setPositionDescription(event.target.value);
-            }}
-            focused
-            fullWidth
-            multiline
-          />
-        </Box>
-      </Collapse>
     </Card>
   );
 };
