@@ -129,7 +129,7 @@ export function AuthProvider({ children }) {
 
     return {};
   }
-  function AddDocument(document, name) {
+  function AddDocument(document) {
     console.log("in add document");
     const uuid = uid();
     const docRef = sRef(
@@ -138,7 +138,7 @@ export function AuthProvider({ children }) {
     );
 
     uploadBytes(docRef, document).then((snapshot) => {
-      console.log("Uploaded a blob or file!", name);
+      console.log("Uploaded a blob or file!");
     });
 
     return { uuid };
@@ -195,6 +195,8 @@ export function AuthProvider({ children }) {
       positionDescription: application.positionDescription,
       appliedAt: application.appliedAt,
       websiteUrl: application.websiteURL,
+      resumeUid: application.resumeUid,
+      coverLetterUid: application.coverLetterUid,
       uid: uuid,
     });
     console.log("set new application in database");

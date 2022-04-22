@@ -16,7 +16,7 @@ export const ApplicationHome = (props) => {
         flexWrap: "wrap",
       }}
     >
-      <Typography sx={{ fontFamily: "Fantasy", margin: 5 }} variant="h3">
+      <Typography variant="p" className="header">
         My Applications
       </Typography>
       <ApplicationActions />

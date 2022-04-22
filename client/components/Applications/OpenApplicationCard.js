@@ -17,7 +17,6 @@ const OpenApplicationCard = (props) => {
   async function handleDelete() {
     deleteApplication(props.id);
   }
-  console.log(props);
   return (
     <Card sx={{ width: 345, margin: 5 }}>
       <Link to={`/application/${props.id}`}>
