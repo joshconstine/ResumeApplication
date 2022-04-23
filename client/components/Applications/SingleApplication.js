@@ -26,6 +26,7 @@ const SingleApplication = (props) => {
     selectedApplication,
     deleteEvent,
     updateSingleApplication,
+    getDocument,
   } = useAuth();
   const [companyName, setCompanyName] = useState("");
   const [positionName, setPositionName] = useState("");
@@ -53,6 +54,8 @@ const SingleApplication = (props) => {
       positionDescription: positionDescription,
       appliedAt: selectedApplication.appliedAt,
       websiteUrl: websiteUrl,
+      resumeUid: selectedApplication.resumeUid,
+      coverLetterUid: selectedApplication.coverLetterUid,
     };
     updateSingleApplication(updatedApplication, id);
   };
@@ -62,8 +65,20 @@ const SingleApplication = (props) => {
     setPositionName(selectedApplication?.positionName || "");
     setPositionDescription(selectedApplication?.positionDescription || "");
     setWebsiteUrl(selectedApplication?.websiteUrl || "");
+    fetchDocument();
   }, [selectedApplication]);
 
+  const fetchDocument = () => {
+    console.log("in fetch document");
+    const img = document.getElementById("droparea");
+    if (selectedApplication && selectedApplication.resumeUid !== "") {
+      getDocument(selectedApplication?.resumeUid, img);
+    }
+    const img2 = document.getElementById("droparea2");
+    if (selectedApplication && selectedApplication.coverLetterUid !== "") {
+      getDocument(selectedApplication?.coverLetterUid, img2);
+    }
+  };
   function handleSubmit() {
     history.push(`/addEvent/${id}`);
   }
@@ -103,7 +118,7 @@ const SingleApplication = (props) => {
       </Box>
     );
   }
-  console.log(selectedApplication);
+
   return (
     <Card sx={{ width: "90%", margin: 5 }}>
       <CardHeader
@@ -134,7 +149,7 @@ const SingleApplication = (props) => {
           })}
         </Box>
         {renderEvents()}
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto">
           <Box sx={{ margin: 1 }}>
             <TextField
               sx={{ paddingBottom: "2rem" }}
@@ -150,6 +165,8 @@ const SingleApplication = (props) => {
               fullWidth
               multiline
             />
+            <embed src="" id="droparea" width="90%" height="600px" />
+            <embed src="" id="droparea2" width="90%" height="600px" />
           </Box>
         </Collapse>
       </CardContent>
@@ -177,15 +194,6 @@ const SingleApplication = (props) => {
           disableElevation
         >
           Add Event
-        </Button>{" "}
-        <Button
-          size="large"
-          variant="contained"
-          sx={{ backgroundColor: "#B363E6" }}
-          className="styleButton"
-          disableElevation
-        >
-          View Documents
         </Button>{" "}
         <ExpandMore
           expand={expandedFourm}
