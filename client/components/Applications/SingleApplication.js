@@ -85,9 +85,7 @@ const SingleApplication = (props) => {
   async function handleDelete(e, delid) {
     deleteEvent(id, delid);
   }
-  function editClick() {
-    history.push(`/edit/application/${id}`);
-  }
+
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -120,7 +118,15 @@ const SingleApplication = (props) => {
   }
 
   return (
-    <Card sx={{ width: "90%", margin: 5 }}>
+    <Card
+      className="column"
+      sx={{
+        width: "90%",
+        margin: 5,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <CardHeader
         sx={{ backgroundColor: "#D3BBD2", width: "80%", margin: 2 }}
         title={selectedApplication.companyName}
@@ -150,9 +156,9 @@ const SingleApplication = (props) => {
         </Box>
         {renderEvents()}
         <Collapse in={expanded} timeout="auto">
-          <Box sx={{ margin: 1 }}>
+          <Box sx={{ margin: 1, width: "90%" }}>
             <TextField
-              sx={{ paddingBottom: "2rem" }}
+              sx={{ paddingBottom: "2rem", width: "90%" }}
               label="Description"
               type="text"
               className="regFont"
@@ -162,7 +168,6 @@ const SingleApplication = (props) => {
                 setPositionDescription(event.target.value);
               }}
               focused
-              fullWidth
               multiline
             />
             <embed src="" id="droparea" width="90%" height="600px" />
