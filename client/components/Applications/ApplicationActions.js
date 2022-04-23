@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 /**
  * COMPONENT
@@ -10,12 +10,36 @@ export const ApplicationActions = (props) => {
     <Box className="optionsRow">
       {/* <Box className="actions">{props.goal} more applications</Box> */}
       <Link to={"/createApplication"}>
-        <Box className="actions">Add Application</Box>
+        <Button
+          size="large"
+          variant="contained"
+          sx={{ backgroundColor: "#B363E6" }}
+          className="styleButton"
+          disableElevation
+        >
+          Add ApplicationActions
+        </Button>
       </Link>
       <Link to={"/goal"}>
-        <Box className="actions">Add Goal</Box>
+        <Button
+          size="large"
+          variant="contained"
+          sx={{ backgroundColor: "#B363E6" }}
+          className="styleButton"
+          disableElevation
+        >
+          Add Goal
+        </Button>
       </Link>
-      <Box className="actions">Historic Applications</Box>
+      <Button
+        size="large"
+        variant="contained"
+        sx={{ backgroundColor: "#B363E6" }}
+        className="styleButton"
+        disableElevation
+      >
+        Historical ApplicationActions
+      </Button>
     </Box>
   );
 };
