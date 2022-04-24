@@ -159,6 +159,21 @@ export function AuthProvider({ children }) {
         // Handle any errors
       });
   }
+  function getDocument(id, img) {
+    const docRef = sRef(
+      storage,
+      "users/" + currentUser.uid + "/documents/" + id
+    );
+    getDownloadURL(sRef(storage, docRef))
+      .then((url) => {
+        // `url` is the download URL for 'images/stars.jpg'
+        // Or inserted into an <img> element
+        img.setAttribute("src", url);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   async function read() {
     if (currentUser) {
       const str = currentUser.uid || "";
@@ -224,7 +239,6 @@ export function AuthProvider({ children }) {
       database,
       "users/" + currentUser.uid + "/applications/" + id
     );
-    console.log(applicationRef);
 
     set(applicationRef, updatedApplication);
   }
@@ -273,6 +287,7 @@ export function AuthProvider({ children }) {
     updateUser,
     userInfo,
     AddDocument,
+    getDocument,
   };
 
   return (

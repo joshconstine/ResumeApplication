@@ -68,7 +68,7 @@ const Profile = () => {
     addPhoto(fileArray[0]);
   };
 
-  const fetchPhoto = (e) => {
+  const fetchPhoto = () => {
     const img = document.getElementById("droparea");
     getPhoto(img);
   };

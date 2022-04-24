@@ -7,18 +7,20 @@ import ApplicationActions from "./ApplicationActions";
  */
 export const ApplicationHome = (props) => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "center",
-        flexWrap: "wrap",
-      }}
-    >
-      <Typography variant="p" className="header">
-        My Applications
-      </Typography>
+    <Box className="column">
+      <Box
+        className="column"
+        sx={{
+          alignSelf: "flex-start",
+          paddingLeft: "5%",
+          alignItems: "flex-start",
+        }}
+      >
+        <Typography variant="p" className="header">
+          My Applications
+        </Typography>
+      </Box>
+
       <ApplicationActions />
       <OpenApplicationsContainer />
     </Box>

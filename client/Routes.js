@@ -10,7 +10,6 @@ import About from "./components/Navbars/Footer/About";
 import CreateApplication from "./components/Applications/CreateApplication";
 import Goal from "./components/Applications/Goal";
 import SingleApplication from "./components/Applications/SingleApplication";
-import EditApplication from "./components/Applications/EditApplication";
 import AddEvent from "./components/Events/AddEvent";
 import EventsHome from "./components/Events/EventsHome";
 import Login from "./components/User/Login";
@@ -39,7 +38,6 @@ const Routes = () => {
           <Route path="/profile" component={Profile} />
           <Route path="/addEvent/:id" component={AddEvent} />
           <Route path="/application/:id" component={SingleApplication} />
-          <Route path="/edit/application/:id" component={EditApplication} />
           <Route path="/" component={Home} />
 
           <Redirect to="/" />

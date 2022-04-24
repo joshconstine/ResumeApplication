@@ -26,6 +26,7 @@ const SingleApplication = (props) => {
     selectedApplication,
     deleteEvent,
     updateSingleApplication,
+    getDocument,
   } = useAuth();
   const [companyName, setCompanyName] = useState("");
   const [positionName, setPositionName] = useState("");
@@ -53,6 +54,8 @@ const SingleApplication = (props) => {
       positionDescription: positionDescription,
       appliedAt: selectedApplication.appliedAt,
       websiteUrl: websiteUrl,
+      resumeUid: selectedApplication.resumeUid,
+      coverLetterUid: selectedApplication.coverLetterUid,
     };
     updateSingleApplication(updatedApplication, id);
   };
@@ -62,17 +65,27 @@ const SingleApplication = (props) => {
     setPositionName(selectedApplication?.positionName || "");
     setPositionDescription(selectedApplication?.positionDescription || "");
     setWebsiteUrl(selectedApplication?.websiteUrl || "");
+    fetchDocument();
   }, [selectedApplication]);
 
+  const fetchDocument = () => {
+    console.log("in fetch document");
+    const img = document.getElementById("droparea");
+    if (selectedApplication && selectedApplication.resumeUid !== "") {
+      getDocument(selectedApplication?.resumeUid, img);
+    }
+    const img2 = document.getElementById("droparea2");
+    if (selectedApplication && selectedApplication.coverLetterUid !== "") {
+      getDocument(selectedApplication?.coverLetterUid, img2);
+    }
+  };
   function handleSubmit() {
     history.push(`/addEvent/${id}`);
   }
   async function handleDelete(e, delid) {
     deleteEvent(id, delid);
   }
-  function editClick() {
-    history.push(`/edit/application/${id}`);
-  }
+
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -103,9 +116,17 @@ const SingleApplication = (props) => {
       </Box>
     );
   }
-  console.log(selectedApplication);
+
   return (
-    <Card sx={{ width: "90%", margin: 5 }}>
+    <Card
+      className="column"
+      sx={{
+        width: "90%",
+        margin: 5,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <CardHeader
         sx={{ backgroundColor: "#D3BBD2", width: "80%", margin: 2 }}
         title={selectedApplication.companyName}
@@ -134,10 +155,10 @@ const SingleApplication = (props) => {
           })}
         </Box>
         {renderEvents()}
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Box sx={{ margin: 1 }}>
+        <Collapse in={expanded} timeout="auto">
+          <Box sx={{ margin: 1, width: "90%" }}>
             <TextField
-              sx={{ paddingBottom: "2rem" }}
+              sx={{ paddingBottom: "2rem", width: "90%" }}
               label="Description"
               type="text"
               className="regFont"
@@ -147,9 +168,10 @@ const SingleApplication = (props) => {
                 setPositionDescription(event.target.value);
               }}
               focused
-              fullWidth
               multiline
             />
+            <embed src="" id="droparea" width="90%" height="600px" />
+            <embed src="" id="droparea2" width="90%" height="600px" />
           </Box>
         </Collapse>
       </CardContent>
@@ -177,15 +199,6 @@ const SingleApplication = (props) => {
           disableElevation
         >
           Add Event
-        </Button>{" "}
-        <Button
-          size="large"
-          variant="contained"
-          sx={{ backgroundColor: "#B363E6" }}
-          className="styleButton"
-          disableElevation
-        >
-          View Documents
         </Button>{" "}
         <ExpandMore
           expand={expandedFourm}
