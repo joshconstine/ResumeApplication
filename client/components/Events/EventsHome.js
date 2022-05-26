@@ -27,7 +27,7 @@ export const EventsHome = (props) => {
       >
         <Box sx={{ display: "flex" }}>
           <Typography sx={{ width: "49%", fontFamily: "Fantasy" }} variant="h3">
-            Events{" "}
+            Events Feature comming soon!
           </Typography>
         </Box>
       </Box>

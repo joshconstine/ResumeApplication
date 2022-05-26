@@ -1,7 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Box, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
+
 /**
  * COMPONENT
  */
@@ -18,17 +18,10 @@ export const TemplatesHome = (props) => {
         alignItems: "center",
       }}
     >
-      <Box
-        sx={{
-          width: "90%",
-          display: "flex",
-          justifyContent: "space-evenly",
-          flexWrap: "wrap",
-          padding: 5,
-        }}
-        className="theme"
-      >
-        templates
+      <Box sx={{ display: "flex" }}>
+        <Typography sx={{ width: "49%", fontFamily: "Fantasy" }} variant="h3">
+          Templates Feature comming soon!
+        </Typography>
       </Box>
     </Box>
   );

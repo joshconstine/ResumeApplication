@@ -34,7 +34,7 @@ export const Home = (props) => {
         }}
       >
         <Typography variant="p" className="header">
-          Hello, {userInfo.firstName}
+          Hello!
         </Typography>
         <Typography variant="p" sx={{ fontSize: 15, marginTop: 1 }}>
           Lets help you find your dream job!
