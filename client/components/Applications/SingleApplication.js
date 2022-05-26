@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
-  FormControl,
-  InputLabel,
-  Input,
   Button,
   Card,
   CardContent,
   CardActions,
   CardHeader,
-  Typography,
   TextField,
   Collapse,
   IconButton,
@@ -35,9 +31,7 @@ const SingleApplication = (props) => {
   const [expanded, setExpanded] = React.useState(false);
   const [expandedFourm, setExpandedfourm] = React.useState(false);
   const id = props.match.params.id;
-  console.log(updateSelectedApplication(id));
   const appliedAt = selectedApplication.appliedAt?.slice(0, 10);
-  console.log("applied at", appliedAt);
 
   const fourms = [
     { text: "Company", ref: companyName, set: setCompanyName },
