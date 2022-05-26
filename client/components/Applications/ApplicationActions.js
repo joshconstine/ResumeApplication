@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 /**
