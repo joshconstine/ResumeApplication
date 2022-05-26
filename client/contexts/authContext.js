@@ -257,6 +257,7 @@ export function AuthProvider({ children }) {
 
     remove(applicationRef);
   }
+  //delete an event
   async function deleteEvent(appId, id) {
     var eventRef = ref(
       database,
