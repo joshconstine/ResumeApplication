@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Box, Card, CardContent, CardHeader, Typography } from "@mui/material";
 import ArticleIcon from "@mui/icons-material/Article";
 import { useHistory } from "react-router-dom";
