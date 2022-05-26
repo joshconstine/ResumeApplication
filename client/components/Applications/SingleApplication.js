@@ -63,7 +63,7 @@ const SingleApplication = (props) => {
   }, [selectedApplication]);
 
   const fetchDocument = () => {
-    console.log("in fetch document");
+    console.log("in fetch document", selectedApplication);
     const img = document.getElementById("droparea");
     if (selectedApplication && selectedApplication.resumeUid !== "") {
       getDocument(selectedApplication?.resumeUid, img);

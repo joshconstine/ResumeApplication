@@ -160,19 +160,25 @@ export function AuthProvider({ children }) {
       });
   }
   function getDocument(id, img) {
-    const docRef = sRef(
-      storage,
-      "users/" + currentUser.uid + "/documents/" + id
-    );
-    getDownloadURL(sRef(storage, docRef))
-      .then((url) => {
-        // `url` is the download URL for 'images/stars.jpg'
-        // Or inserted into an <img> element
-        img.setAttribute("src", url);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    try {
+      console.log("id: ", id);
+      const docRef = sRef(
+        storage,
+        "users/" + currentUser.uid + "/documents/" + id
+      );
+
+      getDownloadURL(sRef(storage, docRef))
+        .then((url) => {
+          // `url` is the download URL for 'images/stars.jpg'
+          // Or inserted into an <img> element
+          img.setAttribute("src", url);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (e) {
+      console.error(e);
+    }
   }
   async function read() {
     if (currentUser) {
