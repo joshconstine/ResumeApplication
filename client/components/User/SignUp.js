@@ -57,7 +57,16 @@ const SignUp = () => {
         </Avatar>
         <Typography variant="h4">SignUp</Typography>
 
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Form.Group id="email">
             <Form.Label>Email</Form.Label>
             <Form.Control type="email" ref={emailRef} required />
