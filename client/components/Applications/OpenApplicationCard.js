@@ -32,7 +32,9 @@ const OpenApplicationCard = (props) => {
       </Link>
       <CardContent>
         <Typography variant="p">{props.application.jobTitle}</Typography>
-        <Typography variant="p">applied on: 4/20/2022</Typography>
+        <Typography variant="p">
+          applied on: {props.application.appliedAt.slice(0, 10)}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button onClick={handleDelete}>delete</Button>
