@@ -40,7 +40,6 @@ const Login = () => {
     <Container>
       <Box
         sx={{
-          marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -48,22 +47,37 @@ const Login = () => {
       >
         <Typography variant="h4">Log In</Typography>
 
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <Form.Group id="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="email" ref={emailRef} required />
-          </Form.Group>
-          <Form.Group id="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" ref={passwordRef} required />
-          </Form.Group>
-          <Button
-            disabled={loading}
-            className="w-100"
-            onClick={(e) => handleSubmit(e)}
-          >
-            Log In
-          </Button>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Box>
+            <Form.Group id="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" ref={emailRef} required />
+            </Form.Group>
+          </Box>
+          <Box>
+            <Form.Group id="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" ref={passwordRef} required />
+            </Form.Group>
+          </Box>
+          <Box>
+            <Button
+              disabled={loading}
+              className="w-100"
+              onClick={(e) => handleSubmit(e)}
+            >
+              Log In
+            </Button>
+          </Box>
           <Link to="/signup" variant="body2">
             Don't have an account? Sign Up
           </Link>
